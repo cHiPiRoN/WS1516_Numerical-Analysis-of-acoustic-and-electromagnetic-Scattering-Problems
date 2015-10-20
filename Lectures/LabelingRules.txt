@@ -1,0 +1,17 @@
+Element										Label
+————————————————————————————————————————————————————————————————————————————————————————
+
+Chapter	i								ci
+Chapter i section j							cisj
+Chapter i section j subsection k					cisejsuk
+
+Always use labels for chapter, section, subsection as Prefix for equations etc.
+
+equation m								eqnm
+equation-array n							eqnn
+
+Examples:
+Chapter 1 >> Section 2 >> equation 1 	 				c1se2e1
+Chapter 1 >> equation-array 2						c1e2
+chapter 4 >> Section 3 >> Subsection 4 >> equation 4	c4se3su4e4
+

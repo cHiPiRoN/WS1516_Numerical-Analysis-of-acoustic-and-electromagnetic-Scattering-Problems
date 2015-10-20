@@ -1,0 +1,90 @@
+\documentclass[11pt, USenglish, oneside]{book}
+\usepackage{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{subfiles}
+
+\usepackage{parskip}
+
+\usepackage{relsize}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{enumerate}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{xfrac}
+
+\usepackage{tikz}
+\usepackage{acro}
+
+\usepackage{ifpdf}
+\usepackage{dsfont}
+
+\ifpdf
+	\pdfminorversion=7
+	\usepackage{hyperref}
+\else
+	\usepackage[hypertex]{hyperref}
+\fi
+
+\newcommand\myshade{85}
+\colorlet{mylinkcolor}{NavyBlue}
+\colorlet{mycitecolor}{YellowOrange}
+\colorlet{myurlcolor}{violet}
+
+\hypersetup{
+  linkcolor  = mylinkcolor!\myshade!black,
+  citecolor  = mycitecolor!\myshade!black,
+  urlcolor   = myurlcolor!\myshade!black,
+  colorlinks = true,
+}
+
+% These have to be loaded after hyperref!
+\usepackage[amsmath,hyperref,thmmarks]{ntheorem}
+\ifpdf
+	\usepackage[ntheorem,framemethod=tikz]{mdframed}
+\else
+	\usepackage[ntheorem,framemethod=default]{mdframed}
+\fi
+\usepackage[capitalize,nameinlink]{cleveref}
+\usepackage[a4paper]{geometry}
+\usepackage{IEEEtrantools}
+
+% Dokument structure
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% Theorems
+\input{theorems.tex}
+
+% Abbreviations
+\input{defines.tex}
+
+\begin{document}
+\pagenumbering{alph}
+\title{Numerical Simulation of acoustic and electromagnetic scattering problems}
+\author{}
+\maketitle{}
+
+\frontmatter
+%\printacronyms
+\tableofcontents
+
+\mainmatter
+\numberwithin{equation}{chapter}
+
+\subfile{Lectures/VL-20-10-2015}
+
+
+\backmatter
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Biblography}
+\bibliographystyle{amsalpha}
+\bibliography{literature}
+
+\end{document}

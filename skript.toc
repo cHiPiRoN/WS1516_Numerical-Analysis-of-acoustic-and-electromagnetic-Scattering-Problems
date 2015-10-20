@@ -1,0 +1,4 @@
+\select@language {USenglish}
+\contentsline {chapter}{\numberline {1}The acoustic scattering Problem in full space}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Theory for the direct Scattering Problem in $\mathbb {R}^3$}{3}{section.1.2}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.6.2)  20 OCT 2015 20:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.6.2)  21 OCT 2015 10:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1931,7 +1931,10 @@ LaTeX Font Info:    Try loading font information for U+stmry on input line 71.
 
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./skri
-pt.toc)
+pt.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 3.
+)
 \tf@toc=\write5
 \openout5 = `skript.toc'.
 
@@ -1941,97 +1944,72 @@ pt.toc)
 
 ] (./Lectures/VL-20-10-2015.tex
 Chapter 1.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 8.
 [1
 
 
-]
+] <Images/VL-20-10-2015_1.png, id=49, 512.314pt x 345.29pt>
+File: Images/VL-20-10-2015_1.png Graphic file (type png)
+
+<use Images/VL-20-10-2015_1.png>
+Package pdftex.def Info: Images/VL-20-10-2015_1.png used on input line 72.
+(pdftex.def)             Requested size: 209.12683pt x 140.94283pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 76.
+(Font)              <14.4> on input line 82.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 76.
+(Font)              <10> on input line 82.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 76.
+(Font)              <7> on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 76.
+(hyperref)                removing `math shift' on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 76.
+(hyperref)                removing `superscript' on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 76.
+(hyperref)                removing `math shift' on input line 82.
 
 [2]
 Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
-nput line 92.
+nput line 98.
+ [3 <./Images/VL-20-10-2015_1.png>]
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
- line 111.
-
-
-LaTeX Warning: Reference `c1se2prbS' on page 1 undefined on input line 111.
-
+ line 117.
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 113.
-
-LaTeX Warning: Reference `c1se2thm1' on page 1 undefined on input line 121.
-
-[3]
+t line 119.
 Package hyperref Info: bookmark level for unknown proof defaults to 0 on input 
-line 124.
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--150
+line 130.
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 153--156
 
  []
 
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
-line 160.
-[4]
-
-LaTeX Warning: Reference `c1se2eqn1' on page 1 undefined on input line 187.
-
-[5]
-
-LaTeX Warning: Reference `c1se2thm3' on page 1 undefined on input line 219.
-
-) [6]
+line 166.
+[5]) [6]
 No file skript.bbl.
 \tf@thm=\write6
 \openout6 = `skript.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 90.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 90.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 91.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 91.
 (./skript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 90.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 90.
-
-
-Package rerunfilecheck Warning: File `skript.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `skript.out':
-(rerunfilecheck)             Before: 4A5CB8E43DCE47A4E8ED14EEB99A18E2;138
-(rerunfilecheck)             After:  D6195AE2A28CE6DFECA1D4DA0ACD1F2D;230.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 91.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 91.
+Package rerunfilecheck Info: File `skript.out' has not changed.
+(rerunfilecheck)             Checksum: D6195AE2A28CE6DFECA1D4DA0ACD1F2D;230.
  ) 
 Here is how much of TeX's memory you used:
- 30632 strings out of 493117
- 599482 string characters out of 6135434
- 673056 words of memory out of 5000000
- 33549 multiletter control sequences out of 15000+600000
+ 30647 strings out of 493117
+ 599757 string characters out of 6135434
+ 672056 words of memory out of 5000000
+ 33560 multiletter control sequences out of 15000+600000
  89076 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,10n,75p,10413b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,15n,75p,10413b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
 14/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2014/texmf-d
@@ -2053,10 +2031,10 @@ fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
 m/lmsy6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb>
-Output written on skript.pdf (8 pages, 297583 bytes).
+Output written on skript.pdf (8 pages, 328906 bytes).
 PDF statistics:
- 156 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 29 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 168 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
+ 42 words of extra memory for PDF output out of 10000 (max. 10000000)
 

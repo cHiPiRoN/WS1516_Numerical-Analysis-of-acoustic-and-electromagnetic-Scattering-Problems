@@ -19,12 +19,12 @@
 		\[
 			p(x,t) = Re[ u(x)e^{-i\omega t}]
 		\]
-		with frequency $\omega$.\newline\noindent
+		with frequency $\omega$ and a real-valued function $u$.\newline\noindent
 		Since 
 		\begin{IEEEeqnarray*}{rCl}
-			\frac{\partial^2}{\partial t^2} &=& \re [-\omega^2 u(x) e^{-i\omega t}]\\
-			\frac{\partial p}{\partial t} &=& Re[-i\omega u(x)e^{-i\omega t}] \\
-			\Delta p &=&\re [\Delta u(x)] e^{-i\omega t}]
+			\frac{\partial^2p(x,t)}{\partial t^2} &=& \re [-\omega^2 u(x) e^{-i\omega t}]\\
+			\frac{\partial p(x,t)}{\partial t} &=& Re[-i\omega u(x)e^{-i\omega t}] \\
+			\Delta p(x,t) &=&\re [\Delta u(x)] e^{-i\omega t}]
 		\end{IEEEeqnarray*}
 		for all times $t>0$, we infer
 		\[
@@ -36,11 +36,11 @@
 		\]
 		We assume, that $c = c_0$ is constant in free space (reference value). We can now define a \emph{wave number}
 		\[
-			\kappa = \frac{\omega}{c_0} > 0
+			\kappa = \overbrace{\underbrace{\frac{\omega}{c_0}}_{>0}}^{>0} > 0
 		\] 
 		and the \emph{index of refraction}
 		\[
-			n(x) = \frac{c_0^2}{c(x)^2}\left((1+i\frac{\gamma}{\omega})\right).
+			n(x) = \frac{c_0^2}{c(x)^2}\left(1+i\frac{\gamma}{\omega}\right).
 		\]
 		This results in the \emph{Helmholtz-Equation}
 		\[
@@ -48,16 +48,17 @@
 		\]
 		We assume that there exists $a>0$ such that
 		\[
-			c(x) = c_0 \text{ and } \gamma(x) = 0\,\quad\forall |x|>a,
+			c(x) = c_0 \text{ and } \gamma(x) = 0,\quad\forall |x|>a,
 		\]
 		that means inhomogeneities of the medium lie inside some bounded region (inside a ball). Furthermore we assume, that outside this ball of radius $a$, $\overline{B_a(0)}$, there are sources that generate plane waves, that is functions of the type
 		\[
-			u^{in} (x) = e^{i\kappa x\cdot\hat{\theta}},
+			u^{in} (x) = e^{i k x\cdot\hat{\theta}},
 		\]
 		where $|\hat{\theta}| = 1$ for $\hat{\theta}\in\mathbb{R}^d$ and $\cdot$ denotes the inner product in $\mathbb{R}^d$. Then, $u^{in}$ satisfies
 		\[
-			\Delta u^{in} + \kappa^2 u^{in} = 0.
+			\Delta u^{in} + k^2 u^{in} = 0.
 		\]
+		(just calculation).
 		This $u^{in}$ generates a \emph{scattered field} $u^s$. The \emph{total field}
 		\[
 			u = u^{in} + u^s
@@ -66,7 +67,12 @@
 		\[
 			\Delta u + \kappa^2 n u = 0.
 		\]
-		% BILD1 BILD 1 soll hier hin
+		\begin{figure}\label{c1se1fig1}
+			\centering
+			\includegraphics[width=0.5\textwidth]{Images/VL-20-10-2015_1.png}
+			\caption{Visualization of the problem}
+		\end{figure}
+
 		Furthermore we assume \emph{Sommerfeld's radiation condition} ($r = |x|$):
 		\[
 			\frac{\partial u^s}{\partial r} - i\kappa u^s(x) = o\left(r^{\frac{1-d}{2}}\right),\quad\text{as } r=|x|\to\infty

@@ -1,0 +1,9 @@
+# LaTeX files that are created during compilation
+
+*.bbl
+*.aux
+*.log
+*.thm
+*.out
+*.toc
+*.blg

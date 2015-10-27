@@ -1,0 +1,174 @@
+\documentclass[../skript.tex]{subfiles]}
+
+	\begin{proof}
+		We introduce the scaling parameter $\varrho = \frac{2b}{\pi}$ and the following function
+		\[
+			w(x) \coloneqq e^{\frac{i}{2}x_1-t\hat{e}\cdot x}u(\varrho x),\quad x\in Q=(-\pi,\pi)^3
+		\]
+		for some parameter $t>0$ and now $\hat e = \begin{bmatrix}1\\i\\0\end{bmatrix}\in\mathbb{C}^3$. Since $w(x)=0$ for all $|x|\geq\frac{pi}{2}$ it can be extended to a $2\pi$-periodic function by
+		\[
+			w(2\pi j+x) = w(x),\quad\forall j\in\mathbb{Z}^3,\,x\in Q,
+		\]
+		with $w\in H^1_{per}(Q)$. It is readily seen that $w$ satisfies 
+		\[
+			\Delta w + \lambda_t\cdot\nabla w + \mu_t w = -\varrho^2\kappa^2\tilde{n}w,
+		\]
+		for
+		\begin{IEEEeqnarray*}{rCl}
+			\lambda_t &\coloneqq& 2t\hat e - \begin{bmatrix}i\\0\\0\end{bmatrix} \\
+			\mu_t &\coloneqq & -\left( it + \frac{1}{4} \right)
+		\end{IEEEeqnarray*}
+		and $\tilde{n}$ is the periodic function
+		\[
+			\tilde{n}(x+2\pi j) = n(\varrho x),\quad x\in\bar{Q},\, j\in\mathbb{Z}^3
+		\]
+		(The proof of this is by straightforward differentiation). \cref{c1se2thm2} applies to this situation with $g\coloneqq -\varrho^2\kappa^2\tilde{n}w$ and yields
+		\[
+			w = L_t g = -\varrho^2\kappa^2 L_t(\tilde{n}w)
+		\]
+		with $\| L_t\|\leq\frac{1}{t}$. This means that 
+		\begin{IEEEeqnarray*}{rCl}
+			\|w\|_{L^2(Q)} &\leq& \frac{1}{t} \varrho^2\kappa^2 \| \tilde{n}w \|_{L^2(Q)} \\
+			&\leq& \frac{\varrho^2\kappa^2 \|n\|_{\infty}}{t}\|w\|_{L^2(Q)}.
+		\end{IEEEeqnarray*}
+		This holds for all $t>0$. Taking $t >> 1$ results in $\|w\|_{L^2(Q)} = 0$ where $w=0$.
+		Thus $u\equiv 0$.
+	\end{proof}
+	
+	\begin{theorem}[Uniqueness]\label{c1se2thm4}
+		\cref{c1se2prbS} admits at most one solution. That is, $u^{in} \equiv 0$ implies $u\equiv 0$.
+	\end{theorem}
+	
+	\begin{proof}
+		Let $u^{in} = 0$. Recall the formula 
+		\[
+			|a-i\beta|^2 = |a|^2 + |\beta|^2 + 2\im (\beta\bar{a}) 
+		\]
+		(elementary proof).
+		We have 
+		\begin{IEEEeqnarray*}{rCl}
+			O\left(\frac{1}{R^2}\right) &=& \int_{|x|=R}\left| \frac{\partial u}{\partial r} - i\kappa u \right|^2\,dS \\
+			&=& \int_{|x|=R} \left( \left|\frac{\partial u}{\partial r}\right|^2 + \kappa^2 |u|^2 \right)\,dS + 2\kappa \im \int_{|x|=R} u\frac{\partial\bar{u}}{\partial r}\,dS 
+ 		\end{IEEEeqnarray*}
+ 		The divergence-theorem implies
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			2\kappa \im \int_{|x|=R} u\underbrace{\frac{\partial\bar{u}}{\partial r}}_{=\nabla\bar{u}\cdot\underbrace{\nu}_{\text{normal}}}\,dS &=& 2\kappa\im \left[\int_{|x|<R} \left( u\Delta\bar{u} + \underbrace{|\nabla u|^2}_{\in\mathbb{R}^+_0} \right)\,dx\right] \\
+ 			&\overset{\text{Helmholtz-eq}}=& 2\kappa\im\left[ \int_{|x|<R} \left( -\kappa^2 \bar{n}|u|^2 \right)\,dx \right] \\
+ 			&\geq& 0,
+ 		\end{IEEEeqnarray*}
+ 		Since $\im{n}\geq 0$. Thus we have for large $R\to\infty$:
+ 		\[
+ 			0\leq\limsup_{R\to\infty} \int_{|x|=R}\left( \left| \frac{\partial u}{\partial r} \right|^2 + \kappa |u|^2 \right)\,dS \leq 0,
+ 		\]
+ 		whence
+ 		\[
+ 			\lim_{R\to\infty} \int_{|x|=R} |u|^2\,dS = 0.
+ 		\]
+ 		\cref{c1se2thm1} (Rellich) implies that $u(x) = 0$ for all $|x|>a$. By the unique continuation principle we have $u\equiv 0$ in $\mathbb{R}^3$.
+	\end{proof}
+
+	We have shown uniqueness. For the existence proof we will construct solutions.
+	\begin{definition}\label{c1se2def5}
+		The function
+		\[
+			\Phi(x,y) \coloneqq \frac{1}{4\pi |x-y|} e^{i\kappa |x-y|},\quad x,y\in\mathbb{R}^3, x\not=y
+		\]
+		is called \emph{fundamental solution} or \emph{free space Green's function}. 
+	\end{definition}
+	$\Phi$ has the following properties
+	\begin{proposition}[Properties of the fundamental solution]\label{c1se2pro6}
+		\begin{enumerate}
+			\item $\Phi(\cdot,y)$ satisfies the Helmholtz-equation $\Delta u + \kappa^2 u = 0$ in $\mathbb{R}^3\setminus\{y\}$
+			\item $\Phi$ satisfies the emph{radiation condition} 
+				\[
+					\frac{x}{|x|}\cdot\nabla_x\Phi(x,y) - i\kappa\Phi(x,y) = O\left(\frac{1}{|x|^2}\right),\quad\text{as }|x|\to\infty
+				\]
+				uniformly in $\hat{x} = \frac{x}{|x|}\in \mathcal{S}^2$ (Sphere)
+			\item $\Phi$ has the asymptotic behaviour
+				\[
+					\Phi(x,y) = \frac{e^{i\kappa|x|}}{4\pi|x|}e^{-i\kappa\hat{x}\cdot y} + O\left(\frac{1}{|x|^2}\right),\quad\text{as }|x|\to\infty
+				\]
+				uniformly in $\hat{x} = \frac{x}{|x|}\in \mathcal{S}^2$ (Sphere)
+		\end{enumerate}
+	\end{proposition}
+
+	\begin{proof}
+		The first 2 properties are easily verified. We prove the third:\newline\newline\noindent
+		We calculate the the binomial formula
+		\begin{IEEEeqnarray*}{rCl}
+			|x-y| - (|x|- \hat{x}\cdot y) &=& \frac{|x-y|^2 - (|x|-\hat{x}\cdot y)^2}{|x-y| + (|x|-\hat{x}\cdot y)} \\
+					&=& \frac{|y|^2 - \bcancel{2x\cdot y} + \bcancel{|x|^2} - \bcancel{|x|^2} + \bcancel{2 x\cdot y} - \overbrace{(\hat{x}\cdot y)^2}^{\leq |y|^2}}{|x|\left( 1+\underbrace{\left| \hat{x} - \frac{y}{|x|} \right|}_{1-\left|\frac{y}{|x|}\right|} - \frac{\hat{x}\cdot y}{|x|}\right)} \\
+					&\leq& \frac{|y|^2}{2|x|\left( 1 - \frac{y}{|x|} \right)}.
+		\end{IEEEeqnarray*}
+		Hence $|x-y| = |x| - \hat{x}\cdot y + O\left(\frac{1}{|x|}\right)$. Take the exponential of this to get
+		\[
+			e^{i\kappa |x-y|} = e^{i\kappa|x|} e^{-i\kappa \hat{x}\cdot y} \left(1+O\left(\frac{1}{|x|}\right)\right).
+		\]
+		By the above formula we also have
+		\[
+			\frac{1}{|x-y|} = \frac{1}{|x|} + \left[ \frac{|x|-|x-y|}{|x-y| |x|} \right] = \frac{1}{|x|} + O\left( \frac{1}{|x|^2} \right).
+		\]
+		So
+		\begin{IEEEeqnarray*}{rCl}
+			\frac{e^{i\kappa|x-y|}}{|x-y|} &=& \frac{e^{i\kappa|x-y|}}{|x|} + O\left(\frac{1}{|x|^2}\right) \\
+				&=& \frac{1}{|x|} e^{i\kappa|x|} e^{-i\kappa\hat{x}\cdot y} + O\left(\frac{1}{|x|^2}\right),
+		\end{IEEEeqnarray*}
+		as $|x|\to\infty$.
+	\end{proof}
+	\begin{remark}
+		The previous result states in particular that $\Phi$ is determined by the function 
+		\[
+			e^{-i\kappa\hat{x}\cdot y}
+		\]
+		on $\mathcal{S}^2$ (up to pertubation). We will see that this property holds in a more general context.
+	\end{remark}
+
+	With the help of the fundamental solution $\Phi$ we can create 
+
+	\begin{theorem}\label{c1se2thm7}
+		Let $\Omega\subseteq\mathbb{R}^3$ be bounded. For every $\phi\in L^2(\Omega)$, the function
+		\[
+			v(x)\coloneqq \int_\Omega \phi(y)\Phi(x,y)\,dy,\quad x\in\mathbb{R}^3
+		\]
+		belongs to $H^1_{loc}(\mathbb{R}^3)$ and satisfies the \emph{Sommerfeld radiation condition}. Moreover, $v$ is the \emph{only} radiating solution (it is the only function in the set of solution that satisfies the Sommerfeld radiation condition) to 
+		\[
+			\Delta v + \kappa^2 v = -\phi
+		\]
+		in the variational sense
+		\begin{equation}\label{c1se2eqn2}\tag{*}
+			\int_{\mathbb{R}^3} \left( \nabla v\cdot\nabla\bar{\Psi} - \kappa^2 v\bar{\Psi} \right)\,dx = \int_{\mathbb{R}^3} \phi\bar{\Psi}\,dx
+		\end{equation}
+		for all $\Psi\in H^1(\mathbb{R}^3)$ with compact support. For any $R>0$ with $\Omega\subseteq B_R(0)\eqqcolon K$ we have with $c=c(R,\kappa,\Omega)$ that
+		\[
+			\|v\|_{H^1(K)} \leq c\|\phi\|_{L^2(\Omega)}.
+		\]
+		In other words, the mapping $\phi\mapsto v$ is a bounded (continuous linear) operator from $L^2(\Omega)$ to $H^1(K)$.
+	\end{theorem}
+
+	\begin{proof}
+		\textbf{(1)} Since $\frac{1}{r^2}$ is locally integrable in $\mathbb{R}^3$, the expression on the right-hand side in \cref{c1se2eqn2} is well-defined. Provided $\phi\in C^1(\bar{\Omega})$, then we can interchange integration and differentiation (posible as we have a majorant, cf. PDE theory) and obtain
+		\[
+			\Delta v + \kappa^2 v = \begin{cases}
+										-\phi &\text{in }\Omega\\
+										0 &\text{in }\mathbb{R}^3\setminus\bar\Omega
+									\end{cases}
+		\]
+		% Hier kommt nächste Vorlesung ein Nachtrag
+		This means that $v$ solves \cref{c1se2eqn2} for any $\kappa\in\mathbb{C}$.\newline\newline\noindent
+		\textbf{(2)} We cannot directly evaluate $L^2$-integrals of the gradient $\nabla_x\Phi$. To prove stability, we first consider the special case $\kappa = i$ and $\phi\in C^1(\bar\Omega)$. Then, the fundamental solution
+		\[
+     		\Phi_i(x,y) = \frac{1}{4\pi|x-y|}e^{-|x-y|}
+		\]
+		decays exponentially for $|x|\to\infty$, ad by approximation arguments \cref{c1se2eqn2} holds for any $\Psi\in H^1(\mathbb{R}^3)$. \newline\newline\noindent
+		Taking $\Psi = v$ we obtain
+		\[
+			\|v\|_{H^1(\mathbb{R}^3)}^2  = \int_\Omega \phi\bar{v} \leq \|\phi\|_{L^2(\Omega)} \|v\|_{H^1(\mathbb{R}^3)}
+		\]
+		(note that \cref{c1se2eqn2} with $\kappa=i$ becomes the $H^1$-Norm). By density, this defines a continuous operator
+		\[
+			\phi\mapsto v\quad\text{from } L^2(\Omega)\text{ to } H^1(K).
+		\]
+	\end{proof}
+
+
+

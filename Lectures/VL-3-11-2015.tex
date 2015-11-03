@@ -1,0 +1,124 @@
+\documentclass[../skript.tex]{subfiles}
+
+
+ 	\begin{remark}
+ 		\textbf{Proof of \cref{c1se2thm7}} (1).\newline\noindent
+ 		To prove that $\Delta v(x) + \kappa^2 v(x) = -\varphi(x)$, for $x\in\Omega$, it satisfies to verify
+ 		\[
+ 			(\Delta+\kappa^2)\int_{B_\varepsilon(x)} \varphi(y)\Phi(x,y)\,dy = -\varphi(x),
+ 		\]
+ 		for small $\varepsilon > 0$.\newline\newline\noindent
+ 		\textbf{1) } We readily see that
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			\kappa^2 \left| \int_{B_\varepsilon(x)} \varphi(y)\Phi(x,y)\,dy \right| &\leq & \frac{\kappa^2}{4\pi}\left|\int_{B_\varepsilon(x)}\frac{e^{i\kappa |y-x|}}{|x-y|}\,dy\right|
+ 		\end{IEEEeqnarray*}
+ 		and the expression on the right tends to $0$ for $\varepsilon \to 0$.\newline\newline\noindent
+ 		\textbf{2) } Since $\Delta_x\Phi(x,y) = \Delta_y\phi(x,y)$, we see 
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			\Delta_y\int_{B_\varepsilon(x)}\varphi(y)\phi(x,y)\,dy &=& \int_{B_\varepsilon(x)}\phi(y)\Delta_y\Phi(x,y)\,dy\\
+ 			&=& \underbrace{-\int_{B_\varepsilon(x)}\nabla\varphi(y)\cdot\nabla\Phi(x,y)}_{\eqqcolon A} + \underbrace{\int_{|y-x|=\varepsilon} \varphi(y) \frac{\partial\Phi(x,y)}{\partial\nu}\,dS(y)}_{\eqqcolon B}.
+ 		\end{IEEEeqnarray*}
+ 		We have that
+ 		\[
+ 			\nabla_y\Phi(x,y) = \frac{1}{4\pi}e^{i\kappa|x-y|}\left( \frac{1}{|x-y|^2}-\frac{1}{|x-y|^3} \right)(x-y),
+ 		\]
+ 		and thus
+ 		\[
+ 			A \leq \|\nabla\varphi\|_{L^\infty}\int_{B_\varepsilon(x)}|\nabla_y\Phi(x,y)|\,dy \to 0,\text{ as }\varepsilon\to 0.
+ 		\]
+ 		We stay with $B$:
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			B &=&= \frac{1}{4\pi}\int_{\partial B_\varepsilon(x)} e^{i\kappa\varepsilon} \left( \frac{1}{\varepsilon} - \frac{1}{\varepsilon^2} \right) \varphi(y)\,dS(y) \\
+ 			&=& \underbrace{\frac{1}{4\pi} e^{i\kappa\varepsilon} \left( \frac{1}{\varepsilon}-\frac{1}{\varepsilon^2} \right) 4\pi\varepsilon^2}_{=e^{i\kappa\varepsilon}(\varepsilon+\varepsilon^{-1})\to -1,\text{ as }\varepsilon\to 0} \underbrace{\dashint{B_\varepsilon(x)}\varphi(y)\,dS(y)}_{\to\varphi(x),\text{ as }\varepsilon\to 0}
+ 		\end{IEEEeqnarray*}
+ 	\end{remark}
+ 	
+ 	\begin{theorem}[Lippmann Schwinger integral equation]\label{c1se2thm8}
+ 		Let $\alpha>0$ and $K=\bar{B_\alpha(0)}$. If $u\in H^1$ solves the \cref{c1se2prbS}, then $u_{| K}\in L^2(K)$ satisfies the \emph{Lippmann Schwinger equation}
+ 		\begin{equation}\tag{LS}\label{c2se2eqnLS}
+ 			u(x) = u^in(x) - \kappa^2\int_{|y|<\alpha}(1-n(y))\Phi(x,y) u(y)\,dy
+ 		\end{equation}
+ 		for almost all $x\in K$.\newline\noindent
+ 		Conversely, if $u\in L^2(K)$ satisfies \cref{c2se2eqnLS}, then it can be extended by the right-hand side of \cref{c2se2eqnLS} to the solution $u\in H^1_{loc}(\mathbb{R}^3)$ of \cref{c1se2prbS}.
+ 	\end{theorem}
+ 	\begin{proof}
+ 		Let $u$ satisfy \cref{c1se2prbS} and define
+ 		\[
+ 			v = \int_K \varphi(y)\Phi(\cdot,y)\,dy
+ 		\]
+ 		for $\varphi = \kappa^2(1-n)u\in L^2(K)$. \cref{c1se2thm7} states that $v\in H^1_{loc}(\mathbb{R}^3)$ satisfies $\Delta v + \kappa^2 v = -\varphi$. Since 
+ 		\[
+ 			\Delta u + \kappa^2 u = \kappa^2(1-n)u
+ 		\]
+ 		and 
+ 		\[
+ 			\Delta u^{in}+\kappa u^{in} = 0,
+ 		\]
+ 		we have (addition of previous equations)
+ 		\[
+ 			\Delta(v+u^s)+\kappa^2(v+u^s) = 0.
+ 		\]
+ 		The uniqueness from \cref{c1se2thm4} shows that $v+u^s = 0$. Therefore
+ 		\[
+ 			u = u^{in} + u^s = u^{in} - v.
+ 		\]
+ 		For the converse direction let $u\in L^2(K)$ satisfy \cref{c2se2eqnLS}. Define $v$ as above, such that $u = u^{in} - v$ in $K$ (in the $L^2$-sense). By \cref{c1se2thm7} we know that $v\in H^1_{loc}(\mathbb{R}^3)$ by extending it to $\mathbb{R}^3$, and that $\Delta v + \kappa v = -\varphi$. This implies $u\in H^1_{loc}(\mathbb{R}^3)$. Furthermore
+ 		\[
+ 			\Delta u + \kappa^2 u = \varphi = \kappa^2 (1-n)u,
+ 		\] 
+ 		that is 
+ 		\[
+ 			\Delta u + \kappa^2 n u = 0.
+ 		\]
+ 		This implies  that $u^s = -v$. The radiation condition follows again from \cref{c1se2thm7}.
+ 	\end{proof}
+
+ 	We now can derive existence for \cref{c1se2prbS}.
+
+ 	\begin{theorem}[Existence of solutions for \cref{c1se2prbS}]\label{c1se2thm9}
+ 		Let $\kappa,n,\theta$ be as assumed previously. Then, the Lippmann Schwinger equation (\ref{c2se2eqnLS}), and thus \cref{c1se2prbS}, is uniquely solvable. 
+ 	\end{theorem}
+
+ 	\begin{proof}
+ 		Define the following operator $T:L^2(B_\alpha(0))\to L^2(B_\alpha(0))$ by
+ 		\[
+ 			(Tu)(x) = \kappa^2 \int_{|y|<\alpha}(1-n(y))\Phi(x,y) u(y)\,dy,\text{ for }|x|<\alpha.
+ 		\]
+ 		\cref{c1se2thm7} shows that $T$ is bounded from $L^2(B_\alpha(0))$ to $H^1(B_\alpha(0))$, and by the compact embedding $H^1(B_\alpha(0))\hookrightarrow L^2(B_\alpha(0))$, the operator $T$ is compact from $L^2(B_\alpha(0))$ into itself. The Lippmann Schwinger equation reads
+ 		\[
+ 			u+Tu = u^{in}
+ 		\]
+ 		and by the Riesz theory (Fredholm alternative) for compact operators, the uniqueness of $u$ (\cref{c1se2thm4,c1se2thm8}) implies its existence.
+ 	\end{proof}
+
+ 	\begin{theorem}[Far-field pattern]\label{c1se2thm10}
+ 		Let $u$ solve \cref{c1se2prbS}. Then we have
+ 		\[
+ 			u(x) = u^{in}(x) + \frac{e^{i\kappa |x|}}{|x|}u_{\infty}(\hat{x})+O\left(\frac{1}{|x|^2}\right),\text{ as } |x|\to\infty,
+ 		\]
+ 		uniformly in $\hat{x} = \frac{x}{|x|}$ (direction of $x$). The function $u_\infty(\hat{x})$ is given by
+ 		\[
+ 			u_\infty(\hat{x}) = \frac{\kappa^2}{4\pi}\int_{|y|<\alpha} (n(y)-1)e^{-i\kappa \hat{x}\cdot y}\,u(y)\,dy
+ 		\]
+ 		is called \emph{far-field pattern} or \emph{scattering amplitude}
+ 		\[
+ 			u_\infty:\underbrace{\mathcal{S}^2}_{\text{Sphere}}\to \mathbb{C}
+ 		\]
+ 		is analytic on $\mathcal{S}^2$ and determines $u^s$ otuside $B_\alpha(0)$ uniquely \newline\noindent
+ 		($u_\infty = 0 \Leftrightarrow u^s(x) = 0$ for $|x|>\alpha$).
+ 	\end{theorem}
+ 	The formula for $u(x)$ follows from \cref{c1se2pro6} (iii):
+ 	\[
+ 		\Phi(x,y) = \frac{e^{i\kappa|x|}}{|x|} e^{-i\kappa\hat{x}\cdot y}+O\left(\frac{1}{|x|^2}\right). 
+ 	\]
+ 	By \cref{c1se2thm1} (Rellich) we have
+ 	\[
+ 		\lim_{R\to 0}\int_{|x|=R} |u(x)|^2\,dS(x) = 0,\text{ for }|x|>\alpha
+ 	\]
+ 	and this implies uniqueness. The analyticity follows from the formula (calculate derivate w.r.t $\hat{x}$).
+ 	\begin{remark}
+ 		\begin{enumerate}
+ 			\item The concept of far-field pattern is \underline{fundamental} to inverse scattering theory.
+ 			\item The analyticity of $u_\infty$ shows that the inverse scattering problem is ill-posed (little pertubations of $u_\infty$ can destroy analyticity of the function!).
+ 		\end{enumerate}
+ 	\end{remark}

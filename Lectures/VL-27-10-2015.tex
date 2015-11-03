@@ -168,7 +168,48 @@
 		\[
 			\phi\mapsto v\quad\text{from } L^2(\Omega)\text{ to } H^1(K).
 		\]
-	\end{proof}
-
+		\textbf{(3) } Let $k>0$. We define 
+ 		\[
+ 			\Psi(x,y) \coloneqq \Phi_k(x,y) - \Phi_i(x,y) = \frac{1}{4\pi|x-y|}\left[e^{i\kappa|x-y|}-e^{-|x-y|}]\right.
+ 		\]
+ 		It is easy to prove that $\Psi$ and $\nabla_x\Psi$ belong to $L^2(K\times\Omega)$. We sketch the crucial part. We calculate
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			4\pi|\nabla_x\Psi(x,y)| &=& \left| 
+ 			\underbrace
+ 			{
+ 				\frac	{i\kappa e^{i\kappa|x-y|}-e^{-|x-y|}}
+ 						{|x-y|}
+ 			}_
+ 			{
+ 				O\left(\frac{1}{|x-y|}\right)}
+ 					+
+ 				\frac	{e^{i\kappa|x-y|}-e^{-|x-y|}}
+ 						{|x-y|^3} \right|\\
+ 			&\overset{*}leq& O\left(\frac{1}{|x-y|}\right)\text{ for small }|x-y|
+ 		\end{IEEEeqnarray*}
+ 		*: The denominator of the right fraction is in $O(|x-y|)$ \newline\newline\noindent
+ 		Thus,
+ 		\[
+ 			\|\nabla_x\Psi\|_{L^2(K\times\Omega)} \leq C\int_K\int_\Omega \frac{1}{|x-y|^2}\,dy\,dx < \infty.
+ 		\]
+ 		\textbf{(4) } With \textbf{(3)} we see that the mapping
+ 		\[
+ 			\varphi \mapsto \int_\Omega \varphi(y)\Psi(\cdot,y)\,dy
+ 		\]
+ 		is bounded from $L^2(\Omega)$ to $H^1(K)$, because
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			\int_K \left| \nabla_x\int_\Omega \varphi(y)\Psi(x,y)\,dy \right|^2\,dx &=& 
+ 				\int_k\left[\int_\Omega \left|\varphi(y)\nabla_x\Psi(x,y)\right|\,dy\right]^2\,dx \\
+ 				&\leq& \int_K \|\varphi\|_{L^2(\Omega)}^2 \|\nabla_x\Psi(x,\cdot)\|_{L^2(\Omega)}^2\,dx\\
+ 				&\leq&  \|\varphi\|_{L^2(\Omega)}^2 \underbrace{\|\nabla_x\Psi\|_{L^2(K\times\Omega)}^2}_{\overset{(3)}< \infty}.
+ 		\end{IEEEeqnarray*}
+ 		This and \textbf{(2)} show that $\varphi\mapsto v$ is also bounded from $L^2(\Omega)$ to $H^1(K)$ for $\kappa>0$. \newline\newline\noindent
+ 		\textbf{(5) }  The radiation condition follows from the radiation condition of $\Phi$:
+ 		\begin{IEEEeqnarray*}{rCl}
+ 			\frac{\partial v}{\partial\nu}-i\kappa v &=& \int_\Omega \varphi(y)\left(\frac{\partial}{\partial\nu}-i\kappa\right) \Phi(x,y)\,dy\\
+ 			&\leq& \|\varphi\|_{L^2(\Omega)} O\left(\frac{1}{r}\right)^2.
+ 		\end{IEEEeqnarray*}
+ 		Uniqueness follows from \textbf{(2)}.
+		\end{proof}
 
 

@@ -46,11 +46,11 @@
 		\[
 			\Delta u + \kappa^2nu = 0,\quad\text{ in }\mathbb{R}^d.
 		\]
-		We assume that there exists $a>0$ such that
+		We assume that there exists $\alpha>0$ such that
 		\[
-			c(x) = c_0 \text{ and } \gamma(x) = 0,\quad\forall |x|>a,
+			c(x) = c_0 \text{ and } \gamma(x) = 0,\quad\forall |x|>\alpha,
 		\]
-		that means inhomogeneities of the medium lie inside some bounded region (inside a ball). Furthermore we assume, that outside this ball of radius $a$, $\overline{B_a(0)}$, there are sources that generate plane waves, that is functions of the type
+		that means inhomogeneities of the medium lie inside some bounded region (inside a ball). Furthermore we assume, that outside this ball of radius $\alpha$, $\overline{B_\alpha(0)}$, there are sources that generate plane waves, that is functions of the type
 		\[
 			u^{in} (x) = e^{i k x\cdot\hat{\theta}},
 		\]
@@ -88,7 +88,7 @@
 					u^{in}(x) = e^{-i\kappa\hat\theta\cdot x},\quad x\in\mathbb{R}^d
 				\]
 				\item $\kappa\in\mathbb{R}, \kappa>0$
-				\item $n\in L^\infty(\mathbb{R}^3),\re n\geq 0, \im n\geq 0$ and $n(x) = 1$ for all $x\in\mathbb{R}^3\setminus B_a(0)$ and some $a>0$
+				\item $n\in L^\infty(\mathbb{R}^3),\re n\geq 0, \im n\geq 0$ and $n(x) = 1$ for all $x\in\mathbb{R}^3\setminus B_\alpha(0)$ and some $\alpha>0$
 		\end{enumerate}
 		We recall
 		\[
@@ -117,14 +117,14 @@
 			Regularity-theory tells us, that the radiation condition is well-defined, given the assumptions from \cref{c1se2prbS}.
 		\end{remark}
 		\begin{theorem}[Rellich's Lemma]\label{c1se2thm1}
-			Let $u$ satisfy $\Delta u + \kappa^2 u$ for every $|x|>a$. The following property 
+			Let $u$ satisfy $\Delta u + \kappa^2 u$ for every $|x|>\alpha$. The following property 
 			\[
 				\lim_{R\to\infty} \int_{|x|=R} |u(x)|^2\,dS = 0
 			\]
-			implies, that $u(x) = 0$ for all $|x| > a$.
+			implies, that $u(x) = 0$ for all $|x| > \alpha$.
 		\end{theorem}
 		\begin{remark}
-			Vice versa, if the property in \cref{c1se2thm1} does not hold, then $u$ cannot vanish for all $|x| > a$.
+			Vice versa, if the property in \cref{c1se2thm1} does not hold, then $u$ cannot vanish for all $|x| > \alpha$.
 		\end{remark}
 		\begin{proof}
 			Employs spherical Bessel functions, see e.g. 
@@ -149,7 +149,7 @@
 		\]
 		\emph{Panceval's inequality} shows
 		\[
-			||g||_{L^2(Q)} = \sum_{j\in\mathcal{Z}^3} |g_j|^2.
+			||g||_{L^2(Q)} = \sum_{j\in\mathbb{Z}^3} |g_j|^2.
 		\]
 		Furthermore, if $g\in L^2(Q)$ and $\sum_{j\in\mathcal{Z}^3} |j|^2 |g_j|^2 < \infty$, where
 		$|j| = |j_1|+|j_2|+|j_3|$, then $g\in H^1(Q)$.\newline\noindent
@@ -164,7 +164,7 @@
 		\]
 
 		\begin{lemma}\label{c1se2thm2}
-			Let $p\in\mathbb{R}^3, a\in\mathbb{R}$ and $\hat e = \begin{bmatrix}1\\i\\0 \end{bmatrix}$. Then, for every $t>0$ and every $g\in L^2(Q)$ there exists a unique solution $w = w_t(g)\in H^1_{per}(Q)$ to the differential equation
+			Let $p\in\mathbb{R}^3, \alpha\in\mathbb{R}$ and $\hat e = \begin{bmatrix}1\\i\\0 \end{bmatrix}$. Then, for every $t>0$ and every $g\in L^2(Q)$ there exists a unique solution $w = w_t(g)\in H^1_{per}(Q)$ to the differential equation
 			\begin{equation}\label{c1se2eqn1}\tag{*}
 				\Delta w + \lambda_t\cdot\nabla w + \mu_t w = g
 			\end{equation}
@@ -172,7 +172,7 @@
 			\[
 				\forall \Psi\in C^\infty_c(Q):\quad\int\left( -\nabla w\cdot\nabla\bar\Psi + \left(\lambda_t\cdot\nabla w + \mu_t w\right)\bar\Psi \right)\,dx = \int_Q g\bar\Psi\,dx
 			\]
-			for $\lambda_t\coloneqq 2t\hat e - i p$, $\mu_t = -(it + a)$. It holds that
+			for $\lambda_t\coloneqq 2t\hat e - i p$, $\mu_t = -(it + \alpha)$. It holds that
 			\[
 				\|w\|_{L^2(Q)} \leq \frac{1}{t}\|g\|_{L^2(Q)},
 			\]
@@ -218,8 +218,8 @@
 				&=& \int_Q g\bar\Psi\,dx.
 			\end{IEEEeqnarray*}
 		\end{proof}
-		\begin{theorem}{Unique continuation principle}\label{c1se2thm3}
-			Let $u\in H^1_{loc}(\mathbb{R}^3)$ solve $\Delta u + \kappa^2 n u = 0$, where $n\in L^\infty(\mathbb{R}^3)$ with $n(x) = 1$ for $|x| > a$, and let $b\geq a$, such that $u(x)=0$ for all $|x|\geq b$. Then we have $ u=0$ in $\mathbb{R}^3$.
+		\begin{theorem}[Unique continuation principle]\label{c1se2thm3}
+			Let $u\in H^1_{loc}(\mathbb{R}^3)$ solve $\Delta u + \kappa^2 n u = 0$, where $n\in L^\infty(\mathbb{R}^3)$ with $n(x) = 1$ for $|x| > \alpha$, and let $b\geq \alpha$, such that $u(x)=0$ for all $|x|\geq b$. Then we have $ u=0$ in $\mathbb{R}^3$.
 		\end{theorem}
 		\begin{remark}
 			\cref{c1se2thm3} holds in a much more general version than we stated here.

@@ -1,0 +1,107 @@
+\documentclass[../skript.tex]{subfiles}
+
+ \section{Well-posedness of the scattering problem in bounded domains}\label{c2se2}
+
+ 	Recall the scattering problem
+ 	\begin{eqnarray}\label{c2se2eqn1}
+ 		\Delta u + \kappa^2 n u &=& 0,\quad\text{ in }\Omega\nonumber\\
+ 		\frac{\partial u^s}{\partial\nu} - i\kappa u^s &=& 0,\quad\text{ on }\partial\Omega
+ 	\end{eqnarray}
+
+ 	in a boudned domain $\Omega\supseteq B_\alpha(0)\supseteq\supp(1-n)$ with absorbing boundary condition \cref{c2se1eqn3} for the scattered wave $u^s \coloneqq u - u^{in}$. W.l.o.g. we assume that $\Omega\subseteq\mathbb{R}^3$ as in \cref{c1}. To be compatible with linear finite elements, we assume that $\Omega$ is polyhedral. Moreover we choose $\Omega$ to be convex, which seems to be reasonable with regard to the desired absorption properties (in this way no inner boundaries may reflect incoming waves).\newline\newline\noindent
+
+ 	Since it is easier for the numerical analysis of finite element methods, we will now switch to the equivalent problem of finding the scattered wave, i.e.
+
+ 	\begin{problem}\label{c2se2prbEquiv}
+ 		Given the incident wave $u^{in}\in H^1(\Omega)$, we seek $u^s\in H^1(\Omega)$ such that
+ 		\begin{eqnarray}\label{c2se2eqn2}
+ 			\Delta u^s + \kappa^2 n u^s &=& \overbrace{-\Delta u^{in} - \kappa^2 n u^{in}}^{\text{known data}},\quad\text{in }\Omega\nonumber\\
+ 			\frac{\partial u^s}{\partial\nu} - i\kappa u^2 &=& 0,\quad\text{on }\partial\Omega.
+ 		\end{eqnarray}
+
+ 		For $u^{in} = ce^{i\kappa\hat\Theta\cdot x},\hat\Theta\in \mathcal{S}^2(\mathbb{R}^3)$ the right hand side of the first equation becodes $\kappa^2(1-n)u^{in}$ (in $\Omega$).
+ 	\end{problem}
+
+ 	The weak formulation of \cref{c2se2eqn2} (and also the concept of a weak solution) is based on the sesquilinearform
+ 	\begin{eqnarray}\label{c2se2eqn3a}
+ 		a:& H^1(\Omega)\times H^1(\Omega) &\to\mathbb{C}\nonumber\\
+ 		&(u,v) &\mapsto \int_\Omega\nabla u\cdot\nabla \overline{v}\,dx - \kappa^2\int_\Omega nu\overline{v}\,dx + i\kappa\int_{\partial\Omega}u\overline{v}\,dS_x
+ 	\end{eqnarray}
+ 	and the anti-linear form
+ 	\begin{eqnarray}\label{c2se2eqn3b}
+ 		F:&H^1(\Omega)&\to\mathbb{C}\nonumber\\
+ 		&v&\mapsto\kappa^2\int_\Omega (1-n)u^{in}\overline{v}\,dx
+ 	\end{eqnarray}
+ 	(satisfies $F(\lambda v) = \overline{\lambda}F(v)$).\newline\newline\noindent
+
+ 	The weak formulation reads: Given $F\in (H^1(\Omega))'$ (space of bounded anti-linear functionals), e.g. the particular $F$ of \cref{c2se2eqn3b}, seek $u^s\in H^1(\Omega)$ such that
+ 	\begin{equation}\label{c2se2eqn4}
+ 		a(u^s, v) = F(v),\quad\forall v\in H^1(\Omega).
+ 	\end{equation}
+
+ 	We call any solution $u^s$ of \cref{c2se2eqn4} a \emph{weak solution of \cref{c2se2eqn2}} and $u=u^{in}+u^s$ \emph{weak solution of 
+ 	\cref{c2se2eqn1} }.\newline\newline\noindent
+ 	The sesquilinear form $a$ is bounded:
+ 	\[
+ 		|a(u,v)| \leq C\|u\|_\kappa\|v\|_\kappa,
+ 	\]
+ 	with respect to the $\kappa$-dependent norm
+ 	\[
+ 		\|\cdot\|_\kappa \coloneqq \sqrt{\|\nabla\cdot\|_{L^2(\Omega)}^2+\kappa^2\|\cdot\|_{L^2(\Omega)}^2},
+ 	\]
+ 	which is equivalent to the classical $H^1$-norm. The boundedness follows from Cauchy-Schwarz inequality and the trace inequality
+ 	\[
+ 		\|v\|_{L^2(\partial\Omega)}^2 \leq C'(\Omega)\|v\|_{L^2(\Omega)}\|v\|_{H^1(\Omega)}.
+ 	\]
+ 	The constant $C'(\Omega)$ (and also the constant $C(\Omega)$) are independent of $\kappa\geq 1$. The regime $\kappa\to 0$ would requiere special treatment here and in what follows. Since this is not our regime of interest, we shall assumme that $\kappa$ is sufficiently large, i.e. $\kappa\geq 1$. All results remain valid for $0<\kappa<1$. However, constants may blow up with $\kappa\to 0$. \newline\newline\noindent\textbf{More explanation:} When $\kappa\to 0$ we are mainly killing the $\kappa^2n u$ term of our equation, and also the $\kappa$ term in the boundary condition. This leads to the Laplace-Problem with Neumann-B.C. However, there is more than one solution (e.g. the constant function is a solution).\newline\newline\noindent
+
+ 	The sesquilinear form $a$ is symetric: $a(u,v) = a(v,u),\,\forall u,v\in H^1(\Omega,\mathbb{R})$. However, it is \underline{not} hermitian in general:
+ 	\[
+ 		a(u,v) \neq \overline{a(u,v)}.
+ 	\]
+
+ 	Moreover $a$ is not coercive (that is, $a$ is far away from being a scalar product), but $a$ satisfies
+ 	\[
+ 		\underbrace{\re a(u,u) + 2\kappa^2 \|u\|_{L^2(\Omega)}^2 = \|u\|_\kappa^2,\quad\forall u\in H^1(\Omega).}_{\text{'Garding's inequality}}
+ 	\]
+ 	due to the compactness of the embedding $H^1(\Omega)\subseteq L^2(\Omega)$.\newline\newline\noindent
+ 	The sesquilinear form $a$ can be cast in the form ``coercive + compact perturbation''. Hence, the well-posedness of \cref{c2se2eqn4} follows from uniqueness by \emph{Fredholm's alternative}.\newline\noindent
+ 	To show uniqueness, assume that $u\in H^1(\Omega)$ satisfies \cref{c2se2eqn4} with right-hand side $F=0$, i.e. 
+ 	\[
+ 		a(u,v) = 0,\quad\forall v\in H^1(\Omega).
+ 	\] 
+ 	Choosing $v=u$ yields
+ 	\[
+ 		\im a(u,u) = \kappa \|u\|_{L^2(\partial\Omega)}^2 = 0,
+ 	\]
+ 	i.e. $u\in H^1_0(\Omega)$. Hence we can extend $u$ to whole $\mathbb{R}^d$, and the extension
+ 	\[
+ 		\tilde{u}(x) \coloneqq \begin{cases}u(x)&x\in\Omega\\ 0&\text{elsewhere}\end{cases}
+ 	\]
+ 	is in $H^1_{loc}(\mathbb{R}^d)$ and satisfies the assumptions of \cref{c1se2thm3} (unique continuation principle). Hence
+ 	\begin{IEEEeqnarray*}{rCl}
+ 		\Delta u + \kappa nu &=& 0\\
+ 		u(x) &=& 0,\quad\forall |x|\geq\beta\geq\alpha
+ 	\end{IEEEeqnarray*}
+ 	implies $u \equiv 0$.\newline\noindent
+ 	This proves that for any $F\in (H^1(\Omega))'$ there exists a unique solution $u^s\in H^1(\Omega)$ of \cref{c2se2eqn4} and
+ 	\[
+ 		\|u^s\|_\kappa \leq C_{st}(\Omega,n,\kappa)\|F\|_{(H^1(\Omega))'},
+ 	\] 
+ 	with some generic (st = stability) constant $C_{st}(\Omega,n,\kappa)$, that only depends on $\Omega, n,\kappa$ and especially \underline{not} on $F,u^s$! For the particular $F$ of \cref{c2se2eqn3b}, this implies
+ 	\[
+ 		\|u^s\|_\kappa \leq C_{st}(\Omega,n,\kappa)\|1-n\|_{L^\infty(\Omega)}\|u^{in}\|_{\kappa,\supp (1-n)}
+ 	\]
+ 	(the scattered wave is bounded by the incident wave).\newline\newline\noindent
+
+ 	The dependence of $C_{st}$ on $|kappa$ is not known in general. Actually, very little is known. With regard to \cite{Betcke}
+	an exponential growth w.r. to $\kappa$ is possible for non generic coefficients $n$. \newline\newline\noindent
+
+	If this is the case, then numerical approximation will hardly be reliable (there is no theoretical evidence in our methods), because perturbations caused e.g. by the Galerkin method, or quadrature errors, or numerical linear algebra (precision of arithmetics), etc. may be amplified by $C_{st}$. There is really not much that we can do apart from ``hoping'' that our computations reflect the true solution. In order to analyse the numerical method, we will assume a moderate growth. \newline\newline\noindent
+
+	\begin{assumption}[Polynomial-in-$\kappa$ stability]\label{c2se2ass15}
+		Given $n\in L^\infty(\Omega)$ with $\supp (1-n)\subseteq B_{\alpha}(0)\subseteq\Omega$, we assume that there are constants $C(\Omega,n)$ and $\beta(\Omega,n)$ such that for all $k\geq 1$ and $F\in (H^1(\Omega))'$, the unique solution $u^s\in H^1(\Omega)$ of \cref{c2se2eqn4} satisfies
+		\[
+			\|u^s\|_\kappa \underbrace{C(\Omega,n)}_{C_{st}(\Omega,n,k)} k^{\beta(\Omega,n)}\|F\|_{(H^1(\Omega))'}.
+		\]
+	\end{assumption}

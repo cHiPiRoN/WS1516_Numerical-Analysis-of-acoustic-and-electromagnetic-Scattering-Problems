@@ -1,0 +1,99 @@
+\documentclass[../skript.tex]{subfiles}
+
+	% Still in chapter 2 section 2 so prefix is 	c2se2___
+	\textbf{Recall that $\Omega$ is convex!}
+	\begin{remark}
+		For constant $n$, it is known that \cref{c2se2ass15} is satisfied with $C(\Omega,n)$ and $\beta(\Omega,n) = 1$. However, for the particular $F$ of \cref{c2se2eqn3b}, this is not relevant, because $n=const$ implies $u^s = 0$. For non-constant coeffientes, almost no results are available in literature.
+	\end{remark}
+	See the literature for a broader overview on regularity estimates.
+	LITERATUR FEHLT!!!!!!!!
+	% CUMMINGS & FENG SHARP REGULARITYU ESTIMATES ... Math Models Appl Sci 16(1), B9, page 160, 2006
+	% Helmaniuk STABILITY ESTIMATES FOR A CLASS OF HELMHOLTZ PROBLEMS Cemm Math Sci 6(3) pages 665-678, 2007
+	
+	\cref{c2se2ass15} will allow us to quantify rates of convergence of the Galerkin method as the mesh-size tends to zero. As usual, the accuracy of the methods depends on the regularity of $u^s$. If the right-han side functional of \cref{c2se2eqn4} is in $L^2$, then the classical regularity theory for $-\Delta$ shows that $u^s \in H^2(\Omega)$ and 
+	\[
+		\|D^2u^s\|_{L^2(\Omega)} \leq C(\Omega)\left(\|\Delta u^s\|_{L^2(\Omega)} + \|\frac{\partial u^s}{\partial\nu}\|_{H^\frac{1}{2}(\partial\Omega)}\right)
+	\]
+	and we can use that $\|\Delta u^s = -\kappa^2 u^s + F$ and $\frac{\partial u^s}{\partial\nu} = i\kappa u^s$. Therefore we can estimate
+	\begin{IEEEeqnarray*}{rCl}
+		\|D^2u^s\|_{L^2(\Omega)} &\leq& C(\Omega)\left(\|\Delta u^s\|_{L^2(\Omega)} + \|\frac{\partial u^s}{\partial\nu}\|_{H^\frac{1}{2}(\partial\Omega)}\right)\\
+		&\leq& C(\Omega,n)\bigg(\|F\|_{L^2(\Omega)} + \underbrace{k^2\|u^s\|_{L^2(\Omega)}}_{=\kappa\|u^s\|_\kappa}+ \kappa\|u^s\|_\kappa\bigg)\\
+		&\leq& C(\Omega,n) \big(\|F\|_{L^2(\Omega)} + \kappa^{\beta(\Omega,n)+1}\underbrace{\|F\|_{(H^1(\Omega))}}_{\leq c(n)\kappa^{-1}\|F\|_{L^2(\Omega)}}\big)
+	\end{IEEEeqnarray*}
+	so in the end
+	\begin{equation}\label{c2se2eqn6}
+		\|D^2u\|_{L^2(\Omega)} \leq C(\Omega,n)\kappa^{\beta(\Omega,n)}\|F\|_{L^2(\Omega)}.
+	\end{equation}
+
+
+%Changing section. Prefix is now c2se3___
+
+\section{Finite element discretization}
+	We study the FE discretization of the model variational problem \cref{c2se2eqn4}. Recall that $\Omega$ is assumed to be polyhedral. Let $\{\mathcal{T}_h\}_{h>0}$ be a family of \emph{regular} subdivisions of $\Omega$ into tetrahedra. For the sake of simplicity, we consider only quasi-uniform triagulations and shape-regular families of triangulations, that is there are constants $c,C>0$ such that 
+	\begin{equation}\label{c2se3eqn1}
+		\forall h>0\,\forall T\in\mathcal{T}_h:\quad ch^d\leq |T|\leq Ch^d,
+	\end{equation}
+	where $h\coloneqq \max_{T\in\mathcal{T}_h} \diam T$.
+
+	\begin{remark}
+		\emph{Regular} means, that any 2 distinct elements of $\mathcal{T}_h$ are either disjoint or share exactly one node, or one face.
+	\end{remark}
+
+	We consider linear finite elements, i.e. we are seeking an approximation of the unknown scattered wave $u^s$  in the subspace
+	\[
+		V_h\coloneqq \left\{ v_h\in C^0(\Omega)|\,\forall T\in \mathcal{T}_h:\,v_h|_T\text{ is affine}\right\} \subseteq H^1(\Omega),
+	\]
+	of continuous, piecewise affine functions.\newline\newline\noindent
+	The approximate scattered field $u_h^s\in V_h$ is selected by Galerkin projection:\newline\noindent
+	\emph{Find $u_h^s\in V_h$ such that}
+	\begin{equation}\label{c2se3eqn2}
+		a(u_h^s,v_h) = F(v_h),\quad\forall v_h\in V_h
+	\end{equation}
+	Note that the well-posedness of the discrete problem is not guaranteed for a general mesh-size $h$.\newline\noindent
+	\textbf{The clear condition } 
+	\begin{equation}\label{c2se3eqn3}
+		h \lesssim \kappa^{-1}
+	\end{equation}
+	\textbf{is not sufficient!} The well-posedness of the standard FEM requires a stronger condition (\emph{resolution condition}) of the form
+	\[
+		h \lesssim \kappa^{-(\beta(\Omega,n)+1)},
+	\]
+	where $\beta$ is the exponent from \cref{c2se2ass15}. We will decude the (conditional) stability / well-posedness of the method from the following error estimate:
+	\begin{theorem}[Quasi-optimality of Galerkin FEM]\label{c2se3thm16}
+		Let $\Omega$ and $n$ are chosen s.t. \cref{c2se2ass15} holds true. Furthermore let $\kappa^{\beta(\Omega,n)+1}h\leq 1$ and sufficiently small.
+		Then there is a constant $C(\Omega,n)$ such that the solution $u^s\in H^1(\Omega)$ and its galerkin approximation $u_h^s\in V_h$ satisfy
+		\begin{equation}\label{c2se3eqn4}
+			\|u^s-u_h^s\|_{\kappa} \leq C(\Omega,n)\min_{v_h\in V_h} \|u^s - v_h\|_\kappa
+		\end{equation}
+	\end{theorem}
+
+	\begin{proof}
+		Define $e\coloneqq u^s-u_h^s\in H^1(\Omega)$ and the following auxiliary problem of finding $z\in H^1(\Omega)$ such that
+		\[
+			a(z,w) = \underbrace{\kappa^2\int_\Omega n\bar{e}\bar{w}\,dS}_{\in L^2(\Omega)},\quad\forall w\in H^1(\Omega).
+		\]
+		As we know from the end of \cref{c2se2}, \cref{c2se2eqn6}, $z\in H^2(\Omega)$ and
+		\[
+			\|D^2z\|_{L^2(\Omega)} + \|z\|_\kappa \leq C(\Omega,n)\kappa^{\beta(\Omega,n)+1}\|e\|_{\kappa},
+		\]
+		where $\beta(\Omega,n)$ is the exponent in \cref{c2se2ass15}, and $C(\Omega,n)$ is some generic constant independent of $\kappa$. This shows that
+		\[
+			\kappa^2 \|n^\frac{1}{2}  e\|_{L^2(\Omega)}^2 = a(z,\bar{e}) = a(e,\bar{z}) \overset{\text{Galerkin property }a(e,\bar{z_h}) = 0}= a(e,\bar{z}-\bar{z_h}).
+		\]
+		Choosing $z_h = I_hz$, the nodal interpolation, then
+		\[
+			\|z-z_h\|_{\kappa} \leq C(\Omega,n)  h \kappa^{\beta(\Omega,n)+1}\|e\|_\kappa.
+		\]
+		In this estimate we are using that $h\kappa^{\beta(\Omega,h)+1}\leq 1$.\newline\noindent
+		Hence,
+		\[
+			\kappa^2\|n^\frac{1}{2}e\|_{L^2(\Omega)}^2 \leq C(\Omega,n)h\kappa^{\beta(\Omega,n)+1}\|e\|_\kappa^2.
+		\]
+		Using the Galerkin property once more yields, for any $v_h\in V_h$
+		\begin{IEEEeqnarray*}{rCl}
+			\|e\|_\kappa^2 &=& \re{a(e,e)} + 2\kappa^2 \|n^\frac{1}{2}e\|_{L^2(\Omega)}^2\\
+			&=& \re a(e,u^s-\cancel{u_h^s}-v_h) + 2\kappa^2\|n^\frac{1}{2}e\|_{L^2(\Omega)}\\
+			&\leq& C(\Omega,n)\|e\|_\kappa \|u^s-v_h\|_\kappa + \tilde{C}(\Omega,n)h\kappa^{\beta(\Omega,n)+1}\|e\|_\kappa^2,
+		\end{IEEEeqnarray*}
+		for sufficiently small $h$, i.e. $h\leq\kappa^{\beta(\Omega,n)+1}$. This proves the assertion.
+	\end{proof}

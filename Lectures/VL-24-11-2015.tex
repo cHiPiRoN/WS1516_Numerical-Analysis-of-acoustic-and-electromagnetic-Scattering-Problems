@@ -47,7 +47,7 @@
  	\]
  	with respect to the $\kappa$-dependent norm
  	\[
- 		\|\cdot\|_\kappa \coloneqq \sqrt{\|\nabla\cdot\|_{L^2(\Omega)}^2+\kappa^2\|\cdot\|_{L^2(\Omega)}^2},
+ 		\|\cdot\|_\kappa \coloneqq \sqrt{\|\nabla\cdot\|_{L^2(\Omega)}^2+\kappa^2\|n^\frac{1}{2}\cdot\|_{L^2(\Omega)}^2},
  	\]
  	which is equivalent to the classical $H^1$-norm. The boundedness follows from Cauchy-Schwarz inequality and the trace inequality
  	\[
@@ -62,7 +62,7 @@
 
  	Moreover $a$ is not coercive (that is, $a$ is far away from being a scalar product), but $a$ satisfies
  	\[
- 		\underbrace{\re a(u,u) + 2\kappa^2 \|u\|_{L^2(\Omega)}^2 = \|u\|_\kappa^2,\quad\forall u\in H^1(\Omega).}_{\text{'Garding's inequality}}
+ 		\underbrace{\re a(u,u) + 2\kappa^2 \|n^\frac{1}{2}u\|_{L^2(\Omega)}^2 = \|u\|_\kappa^2,\quad\forall u\in H^1(\Omega).}_{\text{'Garding's inequality}}
  	\]
  	due to the compactness of the embedding $H^1(\Omega)\subseteq L^2(\Omega)$.\newline\newline\noindent
  	The sesquilinear form $a$ can be cast in the form ``coercive + compact perturbation''. Hence, the well-posedness of \cref{c2se2eqn4} follows from uniqueness by \emph{Fredholm's alternative}.\newline\noindent

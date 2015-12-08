@@ -1,0 +1,156 @@
+\documentclass[../skript.tex]{subfiles}
+
+	\begin{remark}[Resolution condition and stability]
+		\cref{c2se3thm16} states quasi-optimality and stability of the Finite Element Method, provided
+		\[
+			h\kappa^{\beta(\Omega,n) + 1} \leq C(\Omega,n)
+		\]
+		is sufficiently small. In particular, we have stability in the followiung sense
+		\[
+			\|u_h\|_\kappa \leq C(\Omega,n)\|u\|_\kappa\leq C(\Omega,n)\kappa^{\beta(\Omega,n)+1}\|F\|_{H^1(\Omega)}.
+		\]
+		While this resolution condition is rather sharp for quasi-optimality, it can be relaxed if we are merely interested in existence. However, the natural resolution condition 
+		\[
+			\kappa h\leq C
+		\]
+		is \underline{by no means} sufficient for stability of quasi-optimality. There is even a proof that
+		\[
+			\frac{\|u-u_h\|_\kappa}{\min_{v_h\in V_h}\|u-v_h\|_\kappa} \overset{\kappa\to\infty}\to \infty.
+		\]
+		This is referred to as the \emph{pollution effect}. \newline\noindent
+		\textbf{Reference: } Babuska, Sauter, SIAM Rev 2000.
+	\end{remark}
+	\begin{remark} Under the resolution condition \cref{c2se3eqn5} and $H^2$ regularity of $u$, the approximation properties of $V_h$ show that
+		\[
+			\|u-u_h\|_\kappa \lesssim h\kappa\|F\|_{L^2(\Omega)}.
+		\]
+		In particular, for $F$ from \cref{c2se2eqn3b}, we have
+		\[
+			\|u-u_h\|_\kappa \lesssim h\kappa\|u^{in}\|_{\kappa,\supp(n)}.
+		\]	
+	\end{remark}
+
+% New chapter: 3. PREFIX IS NOW c3___
+\chapter{Inverse Problems}\label{c3}
+\section{Basic concepts and examples}\label{c3se1}
+	In many mathematical problems, one is interested in determing a solution of some problem $Px=f$, for given $f$. This is referred to as the \underline{forward} or \underline{direct problem}. \newline\noindent
+	The \underline{inverse problem} is to reconstruct $f$ from given solution $x$. This ``definition'' is rather vague. Consider the following examples.\newline\newline\noindent
+	\begin{example}
+		\underline{Forward problem (FP)}: Find the zeros $(x_1,...,x_n)$ of a given polynomial $p$ of degree $n$\newline\noindent
+		\underline{Inverse problem (IP)}: Determine $p$ with zeros $(x_1,...,x_n)$\newline\noindent
+		$\Rightarrow$The solution of (IP) is given by $p(x) = \prod_{i=1}^n (x-x_i)$. Here (IP) is easier than (FP).
+	\end{example}
+	\begin{example}[Lagrange interpolation]
+		\underline{(FP)}: Evaluate a polynomial $p$ at $(x_1,...,x_n)$\newline\noindent
+		\underline{(IP)}: Find a polynomial $p$ of degree $n$ with prescribed values $(y_1,...,y_n)$ at $(x_1,...,x_n)$.
+	\end{example}
+	\begin{example}[Inverse scattering]
+		\underline{(FP)}: Given $\kappa$, the refractive index $n$ and a plane wave $u^{in}=e^{-i\kappa\Theta\cdot x}$, compute the far field patterns $\hat u_\infty$\newline\noindent
+		\underline{(IP)}: Given far-field patterns $\hat{u}_{\infty}(\hat\Theta)$ for direction(s) $\hat\Theta\in\mathcal{S}^2$, reconstruct the refractive index $n$
+	\end{example}
+
+	We have already seen, that $\hat u_\infty$ is analytic and, hence, the inverse scattering problem is ``ill-posed''.\newline\newline\noindent
+	A problem is referred to as well-posed, if it has a unique solution, which depends continuously on the data.
+
+	\begin{definition}[Well-posedness and ill-posedness]\label{c3se1def20}
+		Let $X, Y$ be normed spaces with a mapping $K:X\to Y$. The equation $Kx=y$ is \emph{well-posed}, if
+		\begin{enumerate}
+		\item For every $y\in Y$ there exists $x\in X$ with $Kx=y$ (``existence'')
+		\item For every $y\in Y$ there exists at most one $x\in X$ with $Kx=y$ (``uniqueness'')
+		\item For every sequence $\{x_n\}\in X^\mathbb{N}$ with $Kx_n\to Kx$ as $n\to\infty$, it holds that
+		$x_n\to x$ as $n\to\infty$ (``Stability'')
+		\end{enumerate}
+		If one of the properties does not hold, then the problem is \emph{ill-posed}. 
+	\end{definition}
+	\begin{remark} The first 2 conditions are algebraic conditions. The last states continuity of $K^{-1}$ and, therefore, depends on the topologies on $X,Y$.
+	\end{remark}
+
+	\begin{example}[Hadamard, 1923]
+		We want to solve $\Delta u =0$ in $\mathbb{R}\times[0,\infty)$, subject to $u(x,0) = f(x), \frac{\partial u}{\partial y}(x,0) = g(x)$ ($x\in\mathbb{R}$). Let $f = 0$ and $g(x) = \frac{1}{n}\sin(nx)$. Then the unique solution is
+		\[
+			u(x,y) = \frac{1}{n^2}\sin(nx)\sinh(ny),\quad(x,y)\in\mathbb{R}\times[0,\infty).
+		\]
+		Therefore
+		\[
+			\sup_{x\in\mathbb{R}}\{|f(x)|,|g(x)|\} = \frac{1}{n} \overset{n\to\infty}\to 0,
+		\]
+		but $\sup_{x\in\mathbb{R}} |u(x,y)| = \frac{1}{h^2}\sin(ny)\to\infty$, as $n\to\infty$. Therefore, this ``initial value problem'' is ill-posed.
+	\end{example}
+	\begin{example}[Differentiation]
+		Let $X=Y=C([0,1])$ with max-norm $\|\cdot\|_\infty$. \newline\noindent
+		\underline{(FP)} Given $x\in X$, find the antiderivative $y\in Y$ with $y(0) = 0$. This is, compute
+		\[
+			y(t) = \int_0^t x(t)\,dt,\quad\forall t\in[0,1].
+		\]
+		\underline{(IP)} Given some $y\in Y$ with $y(0) = 0$, determine the derivative $x = y'$. This means: Solve the integral equation $Kx=y$ where
+		\[
+			(Kx)(t)  = \int_0^t x(t)\,dt,\quad t\in[0,1].
+		\] 
+		To see,  that (IP) is ill-posed, consider a continuous and differentiable $y\in Y$, with $x = y'$. For the perturbation $\delta$ define
+		\[
+			\tilde y (t) \coloneqq y + \delta\sin\left(\frac{t}{\delta^2}\right).
+		\]
+		(We would expect that the difference between the derivatives of $y$ and $\tilde y$ is small, for small $\delta$)\newline\noindent
+		We have $\|y-\tilde y\|_\infty = \delta$. But since 
+		\[
+			\tilde x(t) = x(t) = \frac{1}{\delta}\cos\left(\frac{t}{\delta^2}\right)
+		\]
+		solves $K\tilde x = \tilde y$, and
+		\[
+			\|x-\tilde x\|_\infty = \mathcal{O}\left(\frac{1}{\delta}\right),
+		\]
+		so the problem is ill-posed. \newline\newline\noindent
+		If we now let
+		\[
+			Y = \{y\in C^1[0,1]:\,y(0) = 0\} \text{ with } \|y\|_{C^1} = \|y'\|_\infty,
+		\]
+		the problem is well-posed. Indeed
+		\[
+			\|x-\tilde x\|_\infty = \|y'\tilde{y}'\|_{C^1}.
+		\]
+	\end{example}
+	The previous example shows, that the ``worst-case error'' for some given tolerance $\delta$ may be $\infty$. Let now
+	\[
+		z\coloneqq \tilde y - y
+	\]
+	and for simplicity assume that $z(0) = 0 = z'(0)$ and $\\tilde z\geq 0$. Then
+	\begin{IEEEeqnarray*}{rCl}
+		|x(t)-\tilde x(t)|^2 &=& |z'(t)|^2\\&=& \int_0^2\frac{d}{ds}(z'(s))^2\,ds \\
+		&=& 2\int_0^t z'(s) z''(s) ds\\
+		&\leq& 2\|z''\|_\infty z(t)\\
+		&\leq&2\|y''\tilde y''\|\,\|\tilde{y} - y\|_\infty.
+	\end{IEEEeqnarray*}
+	This means, under additional information
+	\[
+		\max\{\|y''\|_\infty,\|\tilde y''\|_\infty\} \leq E,
+	\]
+	we have the following bound
+	\[
+		\|x-\tilde x\|_\infty \leq 4E \|y\tilde{y}\|_\infty.
+	\]
+	This leads to the following concept
+	\begin{definition}[Worst-case error]\label{c3se1def23}
+		Let $K:X\to Y$ be a linear bounded operator between Banach spaces $X,Y$, and let $X_1\subseteq X$ be a subspace of $X$, with a stronger ``stronger'' norm $\|\cdot\|_1$, i.e.
+		\[
+			\|\cdot\|\leq c\|\cdot\|_1,
+		\]
+		for some $C>0$. We define the \emph{worst-case error} for the error$\delta$ in the data and the a priori information 
+		\[
+			\|x\|_1\leq E,
+		\]
+		by
+		\[
+			\mathcal{F}(\delta,E,\|\cdot\|_1) \coloneqq \sup \left\{\|x\|_X:\,x\in X_1,\,\|Kx\|\leq\delta,\,\|x\|_1\leq E\right\}.
+		\]
+	\end{definition}
+
+	In practical examples, $K$ is often compact. This leads typically to ill-posed problems (inversion of compact operators leads to ill-posed problems). In particular we have the following two results
+
+	\begin{theorem}\label{c3se1thm24}
+		Let $K:X\to Y$ be a linear, bounded, compact operator between Banach spaces $X,Y$, with the property
+		\[
+			\dim\left[ X_{|_{\ker(K)}}\right] = \infty
+		\]
+		(quotient space).\newline\noindent
+		Then there exists a sequence $\{x_n\}\in X^\mathbb{N}$ such that $Kx_n\to 0$, but $\|x_n\|\to\infty$ as $n\to\infty$. In particular, if $K$ is injective, the inverse $K^{-1}:\im(K)\to X$ is unbounded.
+	\end{theorem}

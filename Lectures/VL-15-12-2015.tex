@@ -1,0 +1,156 @@
+\documentclass[../skript.tex]{subfiles}
+
+	% Still in chapter 3 section 1, so prefix is 		c3se1___
+
+	\begin{proof}
+		We write $\mathcal{N}\coloneqq \ker(K)$. Since $\mathcal{N}$ is closed, we can build $X_{|\mathcal{N}}$, which is a normed space:
+		\[
+			\| [x] \| \coloneqq \inf_{z\in\mathcal{N}} \|x+z\|.
+		\]
+		The induced operator $\tilde{K}:X_{|\mathcal{N}}\to Y$, with  $\tilde{K}([x])\coloneqq K(x)$ ($x\in X$), is injective and compact. Since $X_{|\mathcal{N}}$ is infinite-dimensional, the identity $id:X_{|\mathcal{N}}\to X_{|\mathcal{N}}$ cannot be compact.
+		But since $id = \tilde{K}^{-1}\tilde{K}$ and $\tilde{K}$ is compact, $\tilde{K}^{-1}$ cannot be continuous. Otherwise the identity would be compact as composition of continuous and compact operators. Since $\tilde{K}^{-1}$ is unbounded, there exists a sequence $\{[z_n]\}\in (X_{|\mathcal{N}})^\mathbb{N}$ with $\|[z_n]\| = 1$ and $Kz_n\to 0$ as $n\to\infty$. By shifting with $v_n\in\mathcal{N}$ such that $\|z_n+v_n\|\geq\frac{1}{2}$, and defining
+		\[
+			x_n \coloneqq \frac{z_n+v_n}{\sqrt{\|Kz_n\|}},
+		\]
+		we obtain 
+		\[
+			\|Kx_n\| = \frac{\|Kz_n\|}{\sqrt{\|Kz_n\|}}\to 0\quad\text{and}\quad \|x_n\|\to\infty.
+		\]
+	\end{proof}
+
+	Recall the worst-case error
+	\[
+		\mathcal{F}(\delta,E,\|\cdot\|_1) = \sup\{\|x\|:\,\|Kx\|\leq\delta,\,\|x\|_1\leq E,\,x\in X_1\}.
+	\]
+
+	\begin{lemma}\label{ce3se1thm25}
+		Let $K:X\to Y$ be linear, compact and continuous, and assume that $X_{|\ker(K)}$ to be infinite-dimensional. Then, for every a priori information $E>0$ there exists a constant $c>0$ and a tolerance $\delta_0 > 0$ such that 
+		\[
+			\mathcal{F}(E,\delta,\|\cdot\|) \geq c,\quad\forall 0<\delta\leq\delta_0.
+		\]
+	\end{lemma}
+
+	\begin{proof}
+		For contradiction assume that there is a sequence $\{\delta_n\}$, $\delta_n\to 0$, such that $\mathcal{F}(E,\delta_n,\|\cdot\|)\to 0$ as $n\to\infty$. Consider again
+		\[
+			\tilde{K}:X_{|\ker{K}}\to Y
+		\] 
+		and let $\{x_m\}\subset X^\mathbb{N}$ with $Kx_m\to 0$ as $m\to \infty$. Then there exists a subsequence $\{x_{m_n}\}_n$ with 
+		\[
+			\|Kx_{m_n}\|\leq\delta_n,\quad\forall n.
+		\]
+		Define 
+		\[
+			z_n\coloneqq \begin{cases} x_{m_n},& \|x_{m_n}\| \leq E\\ E\|x_{m_n}\|^{-1}x_{m_n},& \|x_{m_n}\| > E\end{cases}
+		\]
+		Then  $\|z_n\|\leq E$ for all $n$, and $\|Kz_n\| \leq \delta_n$. Since the worst-case error converges to zero, also $\|z_n\|\to 0$ has to hold for $n\to\infty$. Moreover, by definition we have $z_n = x_{m_n}$, if $n>>1$ (sufficiently large). (If we are in the second case, the norm is always $E$. Therefore sooner or later we will get into the first case, as $\|z_n\|\to 0$). This procedure cannot only be applied to $\{x_m\}$, but also to any subsequence. Hence $x_m\to 0$ as $m\to\infty$. This implies that $\tilde{K}^{-1}$ is continuous, which contradicts \cref{c3se1thm24}.
+	\end{proof}
+
+%Changing section: Prefix is now		c3se2___
+\section{Regularizing filters}\label{c3se2}
+	In this section, we study one (of many possible) regularization strategy. Throughout this section, let $K:X\to Y$ be linear, bounded, compact operator between Hilbert spaces $X,Y$ and assume that $K$ is injective. We assume that for $y\in Y$ there is a (unique) solution $x\in X$ with $Kx=y$, that is $y\in\im K$. In practice, one has perturbed data $y^\delta$ with 
+	\[
+		\|y-y^\delta\|\leq \delta.
+	\]
+	We have seen that $Kx^\delta = y^\delta$ may not be solvable. The aim is to determine at least some approximation $x^\delta\in X$ such that $\|x-x^\delta\|$ is comparable to the worst-case error. We seek a bounded approximation
+	\[
+		R:Y\to X,\quad\text{of }K^{-1},\quad\mathcal{R}(K)\to X.
+	\]
+	\begin{definition}\label{c3se2def26}
+		A family of linear and bounded operators $(R_\alpha)_{\alpha>0}$ such that $\lim_{\alpha\to 0}R_\alpha K(x) \to x$, for all $x\in X$, is called a \emph{regularization strategy}.
+	\end{definition}
+
+	\begin{remark}
+		\cref{c3se2def26} states \underline{pointwise} convergence towards the identity. It can be shown that uniform convergence cannot be expected in general.
+	\end{remark}
+
+	Let now $y^\delta\in Y$ be ``measured data'' with $\|y-y^\delta\|<\delta$ and define
+	\[
+		x^{\alpha,\delta} \coloneqq R_\alpha y^\delta.
+	\]
+	Then
+	\[
+		\|x^{\alpha,\delta}-x\| \leq \|R_\alpha y^\delta - R_\alpha y\| + \|R_\alpha y - x\| \leq \|R_\alpha\|\,\underbrace{\|y^\delta - y\|}_{\leq\delta} + \|R_\alpha y -x\|
+	\]
+	so
+	\begin{equation}\label{c3se2eqn1}
+		\|x^{\alpha,\delta} - x\| \leq \|R_\alpha\|\delta + \|R_\alpha y-x\|.
+	\end{equation}
+	We expect that $\|R_\alpha\|\to\infty$ as $\alpha\to 0$. Therefore we need a stratetgy for minimizing the RHS of \cref{c3se2eqn1}.
+	%% PICTURE: TRADEOFF ALPHA
+
+	\begin{definition}\label{c3se2def27}
+		A regularization strategy $\alpha = \alpha(\delta)$ is \emph{admissible}, if for $\delta\to 0$ we have $\alpha\to 0$ and 
+		\[
+			\sup \{\|R_{\alpha(\delta)}y^\delta - x\|:\,y^\delta\in Y\text{ with } \|Kx-y^\delta\| < \delta\} \to 0
+		\]
+		for every $x\in X$.
+	\end{definition}
+
+	We now briefly recall the \emph{singular value decomposition (SVD)} in Hilbert spaces. Here $J\subseteq \mathbb{N}$ be an index set (finite or infinite).\newline\noindent
+	Let $K:X\to Y$ be linear and compact with $K^*:Y\to X$. Then $K^*K:X\to X$ is self-adjoint, compact, and has real nonnegative eigenvalues $(\lambda_j)_{j\in J}$. The numbers
+	\[
+		\mu_j \coloneqq \sqrt{\lambda_j}
+	\]
+	are called the \textbf{singular values} of $K$. They can be ordered:
+	\[
+		\mu_1 \geq \mu_2 \geq ... \geq 0.
+	\]
+	The SVD states:
+
+	\begin{theorem}[Singular-value decomposition]\label{c3se2thm28}
+		There exist orthonormal systems $(x_j)_{j\in J}\in X^J$ and $\{y_j\}_{j\in J}\in Y^J$ such that 
+		\[
+			Kx_j = \mu_j y_j,\quad\forall j\in J,
+		\]
+		and $K^*y_j = \mu_j x_j$. We call $(\mu_j,x_j,y_j)_j$ a \emph{singular system} for $K$. Every $x\in X$ has the singular value decomposition
+		\[
+			x = x_0 + \sum_{j\in J}(x,x_j)x_j,\quad\text{for some }x_0\in\ker K
+		\]
+		( $(\cdot,\cdot)$ denotes the scalar product), and
+		\[
+			Kx = \sum_{j\in J}\mu_j(x,x_j)x_j.
+		\]
+		If $kx = y$ is solvable, then
+		\[
+			x = \sum_{j\in J}\frac{1}{\mu_j}(y,y_j)x_j.
+		\]
+	\end{theorem}
+	\begin{proof}
+		See Functional Analysis I.
+	\end{proof}
+
+	By damping the factors $\frac{1}{\mu_j}$ we obtain a class of regularization strategies.
+
+	\begin{theorem}[Regularizing filter]\label{c3se2thm29}
+		Let $K:X\to Y$ be linear and compact, with singular system $(x_j,y_j,\mu_j)_{j\in J}$ and let 
+		\[
+			q:(0,\infty)\times (0,\|K\|)\to \mathbb{R}
+		\]
+		be a function satisfying
+		\begin{itemize}
+		\item [$(i)$] $q(\alpha,\mu) \leq 1$ for all $(\alpha,\mu)\in (0,\infty)\times(0,\|K\|)$
+		\item [$(ii)$] For any $\alpha>0$ there exists a constant $c(\alpha)>0$ such that 
+			\[
+				|q(\alpha,\mu)| \leq c(\alpha)\mu,\quad\forall 0<\mu\leq \|K\|
+			\]
+		\item [$(iii)$] $\lim_{\alpha\to 0}q(\alpha,\mu)\to 1$ pointwise, for every $0<\mu\leq\|K\|$
+		\end{itemize}
+		Then $R_\alpha:Y\to X$ defined by
+		\[
+			R_\alpha(y) = \sum_{j\in J}\frac{q(\alpha,\mu_j)}{\mu_j} (y,y_j)x_j
+		\]
+		for $y\in Y$ is a regularization strategy with 
+		\[
+			\|R_\alpha\| \leq c(\alpha).
+		\]
+		The strategy $\alpha = \alpha(\delta)$ is admissible if $\alpha(\delta)\to 0$ and $\delta c(\alpha(\delta))\to 0$ as $\delta\to 0$.\newline\noindent
+		If in addition, for some $c_1>0$, we have
+		\begin{itemize}
+			\item [$(iv)$] $|q(\alpha,\mu)|\leq c_1\frac{\sqrt{\alpha}}{\mu}$, for all $\alpha>0$ and $0<\mu\leq\|K\|$ then
+				\[
+					\|R_\alpha Kx -x \|\leq c_1\sqrt{\alpha}\|z\|
+				\]
+				provided $x\in\mathcal{R}(K^*)$ with $x = K^*z$.
+		\end{itemize}
+	\end{theorem}

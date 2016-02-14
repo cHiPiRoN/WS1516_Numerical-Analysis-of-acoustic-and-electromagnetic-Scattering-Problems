@@ -1,0 +1,157 @@
+\documentclass[../skript.tex]{subfiles}
+
+\section{The factorization method}\label{c4se3}
+% Prefix is    c4se3___
+
+	We still consider the nonlinear inverse problem of previous paragraphs, but we restrict ourselves to the more modest problem to determine only the shape of the region, where the index of refraction $n$ differs from $1$. In other words, we are looking for the support of the contrast $q=1-n$.\par
+	The \emph{factorization method} of Kirsch \cite{book:Kirsch} provides an explicit characterization of $D\coloneqq \supp{q}$ given far-field measurements (as before) for all incoming wave directions. The approach requires a few more assumptions.
+
+	\begin{assumption}{c4se3ass1}
+		There exist finitely many domains $D_j,\,j=1,...,M$ s.t. 
+		\[
+			\overline{D_j}\cap \overline{D_k} = \emptyset,\quad\text{for } j\neq k
+		\]
+		and 
+		\[
+			\mathbb{R}^3\setminus\bigcup_{j=1}^M \overline{D_j} \quad\text{is connected.}
+		\]
+		Moreover, $n\in L^\infty(\mathbb{R}^3;\mathbb{R})$ such that $q=(1-n) \geq q_0 > 0$ on $D\coloneqq \bigcup_{j=1}^m D_j$ for some $q_0>0$ and $q=0$ (resp. $n=1$) on $\mathbb{R}^3\setminus D$. 
+	\end{assumption}
+
+	The factorization approach is related to the far-field operator, defined by
+	\begin{IEEEeqnarray*}{rCl}
+		F_q : L^2(\mathcal{S}^2) &\to& L^2(\mathcal{S}^2)\\
+		F_q (g)(\hat x)&\coloneqq& \int_{\mathcal{S}^2} u_{\infty,q}(\hat x,\hat\Theta) g(\hat\Theta)\,dS(\hat\Theta),\quad\hat s\in\mathcal{S}^2
+	\end{IEEEeqnarray*}
+	Up to now the far-field $u_\infty$ of $u$ was related to some specific direction of incoming wave $\hat\Theta$. Now we give this as a variable argument.\newline\noindent
+	Here $u_{\infty,q}(\cdot,\hat\Theta):\mathcal{S}^2\to\mathbb{C}$ denotes the far-field pattern of the scattered field $u^s$ caused by an incident plane wave $u^{in}=e^{i\kappa\hat\Theta\cdot x}$ hits the inhomogenity of the material $q$.\par
+	The far-field operator is a compact linear integral operator, that is assumed to be known (at leats in some approximate way, maybe for a given set of directions), because $u_{\infty,q}$ is known data. This section concerns the following variant of the inverse scattering problem:
+	\begin{problem}\label{c4se3prbS}
+		Given the far-field operator $F_q$, determine the support of the scatterer $D=\supp{q}$.
+	\end{problem}
+
+	\begin{theorem}[Factorization of $F_q$]\label{c4se3thm34}
+		The far-field operator $F_q$ has the factorization
+		\[
+			F_q = H^*G_qH
+		\]
+		with bounded linear operator $H:L^2(\mathcal{S}^2)\to L^2(D)$ and its adjoint operator $H^*:L^2(D)\to L^2(\mathcal{S}^2)$ defined by
+
+		\[
+			(Hg)(x) = \int_{\mathcal{S}^2}g(\hat\Theta)e^{i\kappa\hat\Theta\cdot x}\,dS(\hat\Theta),\quad x\in D
+		\]
+		and 
+		\[
+			(H^*\varphi)(\hat x)\coloneqq \int_D \varphi(y)e^{-i\kappa\hat x\cdot y}\,dy,\quad \hat x\in\mathcal{S}^2
+		\]
+		and $G_q:L^2(D)\to L^2(D)$ defined by 
+		\[
+			G_q f \coloneqq \kappa^2 q(f+\kappa^2 v_{|D})
+		\]
+		where $v\in H^1_{loc}(\mathbb{R}^3)$ that solve
+		\[
+			\Delta v + \kappa^2 n v = \kappa^2 g \overbrace{f}^{\text{incident wave field}},\quad\text{in }\mathbb{R}^3
+		\]
+		subject to Sommerfelds radiation condition (c.f. \cref{c2se2eqn2}).
+	\end{theorem}
+
+	\begin{proof}
+		The factorization follows by construction, the linearity of the scattering problem, \cref{c1se2thm7}, \cref{c1se2pro6} (iii).
+	\end{proof}
+
+	It turns out that there is a link between the domain $D$ and the range of the adjoing of the so called \emph{Herglotz operator} $H$ defined in the theorem abvoe.
+
+	\begin{theorem}\label{c4se3thm35}
+		(Let $\mathbb{R}^3\setminus\overline{D}$) connected. Define for any $z\in\mathbb{R}^3$ a far-field $\phi_z\in L^2(\mathcal{S}^2)$ by
+		\[
+			\phi_z(\hat x) \coloneqq e^{-i\kappa\hat x\cdot z},\quad \hat x\in\mathcal{S}^2.
+		\]
+		Then it holds that
+		\[
+			x\in D\quad\Longleftrightarrow\quad\phi_z\in \mathcal{R}(H^*)
+		\]
+		($\mathcal{R}$ is the range (image)).
+	\end{theorem}
+
+	\begin{proof}
+		\underline{$\mathbb{\Rightarrow}$} Let $z\in D$ and chooose $\tilde\Phi\in C^\infty(\mathbb{R}^3)$ with 
+		\[
+			\tilde\Phi(y) = \Phi(y,z) \text{outside } D.
+		\]
+		Moreover set
+		\[
+			\varphi(y)\coloneqq -\Delta \tilde\Phi - \kappa^2\tilde\Phi.
+		\]
+		By \cref{c1se2thm7} we have
+		 \[
+		 	\tilde\Phi = \int \varphi(y)\Phi(\cdot,y)\,dy\quad\text{in }\mathbb{R}^3.
+		 \]
+		 The far-field of $\tilde\Phi$, hence, equals $H^*\varphi$ and also
+		 the far-field pattern of $\Phi(\cdot,z)$ (i.e. $\phi_z$).\newline\newline\noindent
+		 \underline{$\mathbb{\Leftarrow}$} Observe that $\phi_z\in\mathcal{R}(H^*)$ if and only if there is $\varphi\in L^2(D)$ s.t.
+		 \[
+		 	\int_D \varphi(y)\Phi(x,y)\,dy = \Phi(x,z),\quad x\in \left(D\cup \{z\}\right)^C.
+		 \]
+		 For $z\not\in D$ and $x\to z$ the right-hand side blows up while the left-hand side remains bounded (Cauchy-Schwarz,...).
+	\end{proof}
+
+	\begin{theorem}\label{c4se3thm36}
+		Let $\kappa^2$ is \underline{not} an interior transmission eigenvalue and $q(x) \geq q_0 > 0$ in $D$ (doesn't change sign). Then
+		\[
+			\mathcal{R}(H^*) = \mathcal{R}\left(F^*F)^\frac{1}{4}\right).
+		\] 
+
+	\end{theorem}
+	\begin{definition}[Interior transmission eigenvalue]
+		$\kappa>0$ is called interior transmission eigenvalue, if there is a corresponding eigenfunction $u\in H^2_0(D)$ s.t.
+		\[
+			\int_D \frac{1}{n-1}(\Delta u + \kappa^2 u)(\Delta \bar{v}+\kappa^2 n \bar{v})\,dx = 0,\quad\forall v\in H^2_0(D)
+		\]
+	\end{definition}
+	\begin{remark}
+		$\kappa$ is almost always \underline{not} an interior transmission eigenvalue, just for some specific wave numbers.
+	\end{remark}
+	For further information see also \cite{Cakoni}.
+
+	\begin{proof}
+		The proof follows some abstract range identities and in particular from the fact that, under our assumptions, $F_q$ is one-to-one, normal, $id + \frac{i\kappa}{2\pi}F_q$  is unitary, $G_q$ is a compact perturbation of a coercive operator and
+		\[
+			\Im (\varphi,G_q\varphi)_{L^2(Q)} > 0,\quad\forall \varphi\in cl(\mathcal{R}(H)),\,\varphi\neq -.
+		\]
+		For all details, we refer to \cite[Sec. 6.5]{book:Kirsch}. 
+	\end{proof} 
+
+	Finally, Picard's criterion (\cite[Thm A.54]{book:Kirsch}) leads the method.
+	\begin{theorem}\label{c4se3thm37}
+		\[
+			z\in D\quad\Longleftrightarrow\quad \phi_z \in \mathcal{R}\left((F^*F)^\frac{1}{4}\right).
+		\]
+		Let $\{\lambda_j,\, j\in\mathbb{N}\}\subset \mathcal{C}$ be the eigenvalues of $F_q$ with normalized eigenfunctions $\Psi_j\in L^2(\mathcal{S}^2)$, for $j\in\mathbb{N}$. Then
+		\begin{IEEEeqnarray*}{rCl}
+			z\in D &\Longleftrightarrow& \sum_{j\in\mathbb{N}} \frac{|(\phi_z,\Psi_j)_{L^2(\mathcal{S}^2)}|^2}{|\lambda_j|} < \infty\\
+			&\Longleftrightarrow& \left[\sum_{j\in\mathbb{N}} \frac{|(\phi_z,\Psi_j)_{L^2(\mathcal{S}^2)}|^2}{|\lambda_j|}\right]^{-1} > 0
+		\end{IEEEeqnarray*}
+		(using the convention $\frac{1}{\infty}=0$)
+	\end{theorem}
+
+	% Addendum on 2.2.16
+	\begin{remark}
+		\cref{c4se3thm37} shows that 
+		\[
+			\omega(z) \coloneqq \sum_{j\in\mathbb{N}}\left[\frac{|(\phi_z,\Psi_j)_{L^2(\mathcal{S}^2})|^2}{|\lambda_j|}\right]^{-1} \geq 0,
+		\]
+		we have that the characteristic function of $D$ equals $sign(\Omega)$.
+	\end{remark}
+
+	\cref{c4se3thm37} and the previous remark suggest the following algorithm:\newline\noindent
+
+	\begin{algorithm}
+		\begin{algorithmic}[1]
+			\State $\textit{Choose some discrete set of (grid) point (pixels) in a certain test domain}$
+			\State $\textit{For any such point } z \textit{ plot some finite approximation }\newline\newline\noindent \omega_{L,h}(z)\coloneqq \sum_{j=1}^L\left[\frac{|(\phi_z,\Psi_{j,h})_{L^2(\mathcal{S}^2)}|^2}{|\lambda_j|}\right]^{-1}\newline\newline\noindent\textit{ where } L\textit{ is some truncation parameter and }h\textit{ represents the}\newline\noindent\textit{discretization of the far-field operator}$  
+		\end{algorithmic}
+	\end{algorithm}
+	\textbf{The hope is, that one is able to identify $D$ from large values of $\omega_{L,h}$.}\newline\newline\noindent
+	Note that the ill-posedness of this inverse scattering problem affects this imaging process, because we divide by small numbers $|\lambda_j|$. This requires regularization! See e.g. \cite{CCM} Coltan, Coule, Monk Recent developments in inverse accoustic scat. Siam review 42, 2000,
+	For further information on the factorization method see \cite{L16}.
+	Lechleiter Factorization method in inverse gc, prepring universität bremen, 2016,

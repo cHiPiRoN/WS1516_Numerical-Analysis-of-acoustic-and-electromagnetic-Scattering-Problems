@@ -1,0 +1,167 @@
+\documentclass[../skript.tex]{subfiles}
+
+% Assume prefix is chapter 3 section 3 so prefix: c3se3___
+
+	% In class: Theorem 29 was stated. Now comes an Addendum to the proof
+	% It was forgotten to say: The regularization strategy is admissible, then necessary is $\delta c(\alpha(\delta)) \to 0
+	\begin{proof}[Addendum to the proof of \cref{c3se3thm29}]
+		To see that for $\delta\to 0,\,\alpha(\delta)\to 0$ and $\delta c(\alpha(\delta))\to 0$ implies admissibility, we see for 
+		\[
+			\|Kx-y^\delta\|_Y < \delta
+		\] 
+		that
+		\[
+			\|R_{\alpha(\delta)}y^\delta -x\|_X \leq \underbrace{\|R_{\alpha(\delta)}(y^\delta - Kx)\|_X}_{\leq c(\alpha(\delta))\delta} + \underbrace{\|R_{\alpha(\delta)}Kx-x\|_X}_{\to 0\text{ by \cref{c3se3thm29}}}.
+		\]
+		$\Rightarrow$ This is admissibility!
+	\end{proof}
+
+	From formula \cref{c3se3eqn3.2} we see that we seek $x^\alpha = R_\alpha y$ with 
+	\[
+		R_\alpha: (\alpha Id + K^*K)^{-1}K^*:Y\to X.
+	\]
+	Assume $K$ is compact and linear wit hsingular system $(\mu_j,x_j,y_j)$. Then 
+	\begin{IEEEeqnarray*}{rCl}
+		R_\alpha y &=& (\alpha Id + K^*K)^{-1}K^* y\\
+		&=& \sum_{j=1}^\infty \frac{1}{\alpha + \mu_j^2} (K^*y,x_j)x_j \\
+		&=& \sum_{j=1}^\infty \frac{1}{\alpha+\mu_j^2} (y,y_j)x_j \\
+		&\overset{q(\alpha,\mu_j)=\frac{\mu_j^2}{\alpha+\mu_j^2}}=& \sum_{j=1}^\infty \frac{q(\alpha,\mu_j)}{\mu_j} (y,y_j)x_j
+	\end{IEEEeqnarray*}
+
+	The function $q$ satisfies
+	\begin{equation}\tag{**}
+		|q(\alpha,\mu)-1| = \frac{\alpha}{\alpha+\mu^2} = \frac{\sqrt{\alpha}}{\mu}\frac{\sqrt{\alpha}\mu}{\alpha+\mu^2} \leq \frac{1}{2}\frac{\sqrt{\alpha}}{\mu}
+	\end{equation}
+
+	The last estimate follows using the elementary formula
+	\[
+		2\sqrt{\alpha}\mu \leq \alpha + \mu^2.
+	\]
+
+	This is $(iv)$ of \cref{c3se3thm29}. Hence we obtain
+
+	\begin{theorem}[Tikhonov regularization method]\label{c3se3thm30}
+		Let $K:X\to Y$ be linear and compact, and $\alpha > 0$.
+		\begin{itemize}
+			\item [$(i)$] The operator $\alpha Id + K^*K$ is boundedly invertible. $(R_\alpha)_\alpha$ forms a regularization strategy with
+			\[
+				\|R_\alpha\| \leq \frac{1}{2\sqrt{\alpha}}.
+			\]
+			$x^{\alpha,\delta} = R_\alpha y^\delta$ is the unique solution to
+			\[
+				\alpha x^{\alpha,\delta} + K^*Kx^{\alpha,\delta} = K^* y^\delta.
+			\]
+			Every choice $\alpha(\delta)$ with $\alpha(\delta)\to 0$ and $\frac{\delta^2}{\alpha(\delta)}\to 0$ as $\delta\to 0$ is admissible!
+			\item Let $x\in K^* z\in \im{K^*}$ and $\|z\|_Y\leq E$. The choice $\alpha(\delta) = c\frac{\delta}{E}$ for some $c>0$ leads to
+			\[
+				\|x^{\alpha(\delta),\delta}-x\|_X \leq \frac{1}{2} \left(\frac{1}{\sqrt{c}} + \sqrt{c}\right)\sqrt{\delta E}.
+			\]
+		\end{itemize}
+	\end{theorem}
+	\begin{proof}
+		$(i)$ Follows from the above discussion. Indeed we have $2\sqrt{\alpha}\mu\leq\alpha+\mu^2$ and hence
+		\[
+			q(\alpha,\mu) = \frac{\mu^2}{\alpha+\mu^2} \leq \frac{\mu}{2\sqrt{a}},
+		\]
+		which verifies $(ii)$ of \cref{c3se3thm29} for $c(\alpha) = \frac{1}{2\sqrt{\alpha}}$.\par
+		$(ii)$ follows from \cref{c3se3eqn3.1}:
+		\[
+			\|x^{\alpha,\delta}-x\|_X \leq \delta\|R_\alpha\|+\|R_\alpha Kx-x\|
+		\]
+		and \cref{c3se3thm29} $(iv)$ and $(**)$, namely
+		\[
+			\|R_\alpha Kx-x\|_X \leq \frac{\sqrt{\alpha}}{2}\|z\|_y,\quad\text{for } c_1 = \frac{1}{sqrt{2}}.
+		\]
+		Then
+		\[
+			\|x^{\alpha,\delta}-x\|_X \leq \frac{\delta}{2\sqrt{\alpha}} + \frac{\sqrt{\alpha}}{2}\|z\|_Y\quad\text{ since }\|R_\alpha\|\leq\frac{1}{2\alpha} \text{ from (i)}.
+		\]
+		With $\alpha(\delta)=c\frac{\delta}{E}$ we obtain
+		\begin{IEEEeqnarray*}{rCl}
+			\|x^{\alpha,\delta}-x\|_X &\leq& \frac{\sqrt{\delta}\sqrt{E}}{2\sqrt{c}} + \frac{\sqrt{c}\sqrt{\delta}}{2\sqrt{E}} \underbrace{\|z\|_Y}_{\leq E}\\
+			&\leq& \left(\frac{1}{2\sqrt{c}}+\frac{\sqrt{c}}{2}\right)\sqrt{\delta E}.
+		\end{IEEEeqnarray*}
+	\end{proof}
+
+	\begin{example} $X=\mathbb{R}$, $Y=\mathbb{R}^2$. Let
+	\[
+		K:X\to Y,\quad K(x) = \begin{bmatrix}x\\0\end{bmatrix} = \underbrace{\begin{bmatrix}1\\0\end{bmatrix}}_{=K} x.
+	\]
+	Hence
+	\[
+		\alpha Id + K^* K = 1+\alpha,
+	\]
+	and so for
+	\[
+		\begin{bmatrix}y_1^\delta\\y_2^\delta\end{bmatrix}\in Y
+	\]
+	the regularized problem is
+	\[
+		(1+x^{\alpha,\delta}) = y_1^\delta.
+	\]
+	Thus: $x^{\alpha,\delta} = \frac{y_1^\delta}{1+\alpha}$.\newline\newline\noindent
+	\end{example}
+	\begin{remark}
+		The bound from \cref{c3se3thm30} $(ii)$ can for the above model problem even exactly computed.
+	\end{remark}
+
+% New chapter
+% new prefix:	c4______
+\chapter{The inverse scattering Problem}\label{c4}
+	In this chapter we applly the ideas of regularization theory to the inverse scattering problem.
+
+
+\section{Uniqueness for the inverse scattering problem}\label{c4se1}
+	We revisit the Helmholtz equation and adopt the notation of \cref{c1}. We ask the following question:\par
+	Given the far-field patterns $u_\infty:\mathcal{S}^2\to\mathbb{C}$ arising the solution $u$ of the forward scattering \cref{c1se2prbS}, can we determine the refractive index $n$?\newline\newline\noindent
+
+	The answer is, in principle, positive (in principle means we require infinitely many measurements), as the following result shows.
+
+	\begin{theorem}[Uniqueness]\label{c4se1thm33}
+		Let $n_1,n_2\in L^\infty(\mathbb{R})$ be two refractive indices with $n_1(x) = n_2(x) = 1$ for all $|x|\geq\alpha$, and let $u_{1,\infty},u_{2,\infty}$ be the corresponding far-field patterns. If 
+		\[
+			u_{1,\infty}(\hat x,\hat \Theta) = u_{2,\infty}(\hat x,\hat\Theta),\quad\forall \hat x\in\mathcal{S}^2\,\forall \hat\Theta\in\mathcal{S}^2
+		\]
+		then $n_{1} = n_{2}$ (almost everywhere)!\par
+		That is, the knowledge of all possible far-field patterns for $\hat\Theta\in\mathcal{S}^2$ uniquely determines the refractive index.
+	\end{theorem}
+
+	\begin{proof}
+		Let $b>a$ and let $v_1\in H^1(B_b(0))$ be any solution to $\Delta v_1 + \kappa^2 n_1v_1 = 0$. Let $v_2 = u_2(\cdot,\hat\Theta)$ be the (unique!) solution of \cref{c1se2prbS} with
+		\[
+			u^{in}(x) = e^{i\kappa\hat\Theta\cdot x}
+		\]
+		and the refractive index $n_2$, with $\hat\Theta\in\mathcal{S}^2$ arbitrary. Let $u_1(\cdot,\hat\Theta)$ solve \cref{c1se2prbS} with $u^{in}$ and refractive index $n_1$. Set
+		\[
+			u \coloneqq u_1(\cdot,\hat\Theta) - u_2(\cdot,\hat\Theta) = u_1^s(\cdot,\hat\Theta) - u_2^s(\cdot,\hat\Theta)
+		\]
+		(just split the solution into incoming and scattered part).\par
+		We assume $u_{1,\infty}(\cdot,\hat\Theta) = u_{2,\infty}(\cdot,\hat\Theta)$. From Rellich's lemma (\cref{c1se2thm1}) we know that $u=0$ outside $B_a(0)$. Furthermore, by the definition of $u$ we have
+		\[
+			\Delta u + \kappa^2 n_1 u = \kappa^2(n_2-n_1)v_2, 
+		\]
+		in the weak sense
+		\begin{IEEEeqnarray*}{rCl}
+			\int_{\mathbb{R}^3} ( \nabla u\cdot\nabla\bar\Psi - \kappa^2n_1u\bar\Psi)\,dx &=& -\kappa^2\int_{\mathbb{R}^3} (n_2-n_1)v_2\bar\Psi\,dx.
+		\end{IEEEeqnarray*}
+		As $u$ vanishes outside of $B_a(0)$ we can restrict the integrals to this ball:
+				\begin{IEEEeqnarray*}{rCl}
+			\int_{B_a(0)} ( \nabla u\cdot\nabla\bar\Psi - \kappa^2n_1u\bar\Psi)\,dx &=& -\kappa^2\int_{B_a(0)} (n_2-n_1)v_2\bar\Psi\,dx.
+		\end{IEEEeqnarray*}
+		for all $\Psi$ with compact support. We choose $\Psi = \overline{v_1\phi}$ for some smooth function $\phi$ with compact support, that is $1$ in $B_a(0)$.\par
+		This leads to
+		\begin{IEEEeqnarray*}{rCl}
+			\kappa^2 \int_{B_a(0)} (n_1-n_2)v_1v_2\,dx &=& \int_{B_a(0)} ( \nabla u\cdot\nabla v_1 - \kappa^2 n_1uv_1)\,dx \\
+			&=& 0
+		\end{IEEEeqnarray*}
+		because $\Delta v_1 + \kappa^2 n_1v_1 = 0$ in $B_b(0)$ and the test function $u$ vanishes outside $B_a(0)$. Thus, we have shown
+		\begin{equation}\tag{*}
+			\int_{B_a(0)} (n_1-n_2)v_1v_2\,dx = 0.
+		\end{equation}
+		By the density result of \cref{c1se3thm14}, $(*)$ holds for all $v_2$ that solve
+		\[
+			\Delta v_2 + \kappa^2 n_2 v_2 = 0,\quad\text{in } B_b(0).
+		\]
+	\end{proof}
+
+

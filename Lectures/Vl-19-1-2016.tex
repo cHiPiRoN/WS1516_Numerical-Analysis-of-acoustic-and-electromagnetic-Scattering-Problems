@@ -1,0 +1,86 @@
+\documentclass[../skript.tex]{subfiles}
+
+
+	\section{The regularized Problem}\label{c4se2}
+
+	In this section we consider refractive indices $n\in L^2(D)$ for some bounded region $D\subseteq B_a(0)$.\newline\newline\noindent
+	\textbf{Bibliography:} For inverse problems in general and scattering theory see \cite{book:Kirsch} or \cite{LKK}.\newline\newline\noindent
+	Motivated by \cref{c4se1thm33} we study the ``contrast-to-measurement operator'', where the contrast $q$ is defined as $q=n-1$. 
+	\[
+		T:L^2(D)\to L^2(\mathcal{S}^2\times \mathcal{S}^2),\quad q\mapsto \biggl[(\hat x,\hat\Theta)\mapsto u_{\infty,1+q}(\hat x,\hat\Theta)\biggr].
+	\] 
+	Here, for the plane wave direction $\hat\Theta\in\mathcal{S}^2$ we denote the far-field pattern of the solution to \cref{c1se2prbS} with refractive index $n=1+q$ as $u_{\infty,1+q}(\cdot,\hat\Theta)$. The inverse problem reads
+	\begin{equation}\label{c4s2eqn4.1}
+		Tq = f
+	\end{equation}
+	for given $f\in L^2(\mathcal{S}^2\times\mathcal{S}^2)$. Here $f$ represents far-field measurements for all $\hat\Theta\in\mathcal{S}^2$. We have already discussed, that \cref{c4s2eqn4.1} is ill-posed. We now want to apply the ideas of the Tikhonov regularization to this setting. For theoretical justification see \cite{LKK}. \newline\noindent
+	For given $\alpha > 0$, the Tikhonov functional reads, for $q\in L^2(D)$:
+	\[
+		J_\alpha(q) \coloneqq \|Tq-f\|_{L^2(\mathcal{S}^2\times\mathcal{S}^2)}^2 + \alpha \|q\|_{L^2(D)}^2.
+	\]
+	Heuristically, the term $\alpha\|q\|_{L^2(D)}^2$ models the a priori information that $q$ is not very large (example: material deffects). The practical minimization of $J_\alpha$ requires the discretization in steps.
+	\newline\newline\noindent
+		\framebox[.05\textwidth]{1.} In practical situations, only finitely many measurements $\hat\Theta\in\Xi_h\subseteq\mathcal{S}^2$ are known.\newline\newline\noindent \framebox[0.05\textwidth]{2.} The space $L^2(D)$ over which we optimize must be discretized. We choose a mesh / triangulation $D_h$ of $D$ and choose the ansatz space $P_0(D_h)$ of piecewise constants.\newline\newline\noindent
+		\framebox[0.05\textwidth]{3.} For the computation of the far-field patterns we have to discretize the Helmholtz equation with the techniques of \cref{c2}. We truncate the domain to some bounded $\Omega\subseteq\mathbb{R}^3$ with a triangulation $\Omega_h$. Then we solve \cref{c2se2eqn3b} with \[
+			F_{\hat\Theta} = -\kappa^2 qu^{in}(\cdot,\hat\Theta)
+			\]
+
+	and obtain the far-field approximation $u_{\infty,1+q}^h$.\newline\newline\noindent
+
+	%FIGURE BILD MESHES HIER REIN!!
+
+	Altough the discrete Tikhonov functional reads, for $q\in P_0(D_h)$,
+	\[
+		J_\alpha^h(q) = \sum_{\hat\Theta\in\Xi_h} \|u_{\infty,1+q}^h(\cdot,\hat\Theta)-f(\cdot,\hat\Theta)\|_{L^2(\mathcal{S}^2)}^2 + \alpha\|q\|_{L^2(D)}^2.
+	\]
+	The discrete inverse scattering problem is\newline\newline\noindent
+		\framebox[0.7\textwidth]{minimize $J_\alpha^h$ over $P_0(D_h)$}\newline\newline\noindent 
+	
+
+	Suppose $N=dim(P_0(D_h))$, then this is a nonlinear minimization problem over $\mathbb{R}^N$. Several methods are available for the practical approx. solution. A necessary optimality condition is $DJ_\alpha(q_*) = 0$ for a minimizer $q_*$ and the (Fréchet) derivative $D$. The chain rule shows that the crucial part in the computation of $DJ_\alpha^h$ is the computation of
+	\[
+		\frac{\partial}{\partial q_j} u_{\infty,1+q}^h,
+	\]
+	that is the derivative of the Helmholtz solution w.r.t $q$. We write $q = \sum_{T\in\Omega_h}q_T 1\hspace{-0.6em}1_T$. \newline\noindent
+	We now identify $q$ with $(q_j)_{j=1}^N, q = \sum_{j=1}^N q_j 1\hspace{-0.6em}1_j$ for the characteristic function $1\hspace{-0.6em}1_j$ of $T_j\in D_h$. We want to compute
+	\[
+		\frac{\partial}{\partial q_j} u_{h,1+q}
+	\]
+	(We surpress the parameter $\hat\Theta$ and far-field transformation). We denote by $A$ the finite element stiffness matrix, by $M$ the boundary mass matrix. Then \cref{c2se2eqn3b} reads
+
+	\[
+		A u_h^s - \kappa^2 M ((1+q)*u_h^s) - i\kappa Bu_h^s = -\kappa M(q*u^{in}).
+	\]
+	\textbf{Notation:} For $p\in P_0(D_h)$ and $v\in P_1(\Omega_h)\cap H^1(\Omega)$ we write $(p*v)$ for the function
+	\[
+		(p*v)_{|_{T_j}} = p_j v_{|_{T_j}}
+	\]
+	(assume that $D_h,\Omega,h$ are properly aligned (i.e. same meshes are used and $D_h$ is part of the mesh of $\Omega_h$)). \newline\noindent
+	\textbf{Warning:} We deal with real-valued basis functions, so $A,M,C$ are symmetric. In general this is not true.\newline\newline\noindent
+	Now, a formal derivative with the chain rule gives
+	\[
+		A\frac{\partial}{\partial q_j}u_h^s - \kappa^2 M ( (1+q)*\frac{\partial}{\partial q_j}u_h^s) - \kappa^2 M ( e_j*u_h^s) - i\kappa B\frac{\partial u_h^s}{\partial q_j} = -\kappa M(e_j*u^{in})
+	\]
+	for the $j$-th standard cartesian basis vector $e_j$. Wit
+	\[
+		w_h\coloneqq \frac{\partial}{\partial q_j}u_h^s
+	\]
+	this means
+	\[
+		Aw_h-\kappa^2 M((1+q)*w_h)-i\kappa Bw_h = -\kappa M(e_j*u^{in}) + \kappa^2(Me_j*u_h^s).
+	\]
+	Here $u^s_h$ is the discrete Helmholtz solution for the contrast $p$ where we want to compute the derivative. This means $w_h$ is the solution of a (fara...?) Helmholtz problem, and the computation of $DJ_\alpha^h$ requires the solution of $\# \Xi_h\times N$ Helmholtz problems. In Newton's method we require the Hessian matrix $D^2J_\alpha^h$. For
+	\[
+		z_h = \frac{\partial}{\partial q_j}\frac{\partial}{\partial q_l}u_h^s
+	\]
+	a similar calculation yields 
+	\[
+		Az_h - \kappa^2 M((1+q)*z_h) - i\kappa Bz_h = \kappa^2 M(e_j*\frac{\partial u_h}{\partial q_l} + e_l*\frac{\partial u_h}{\partial q_j}).
+	\]
+	The right-hand side stems from the computation of $DJ_\alpha^h$, so it is known. We have $O(N^2)$ problems to solve. \newline\noindent
+	By reduced integration of the right-hand side (quadrature formula) we can reduce it to $N$ problems: First solve for all unit vectors $e_j$ and then scale by the average of $\frac{\partial u_h}{\partial q_j}$ etc. This corresponds to 
+	\[
+		\int_T q_hv_h\approx \dashint_Tv_hq_h\meas{T}
+	\]
+	This procedure may be less accurate but much cheaper! \newline\newline\noindent
+	This discussion shows that an efficient solution method for the (forward) Helmholtz problem is very important.
